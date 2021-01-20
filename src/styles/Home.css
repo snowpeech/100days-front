@@ -1,0 +1,45 @@
+form div {
+    vertical-align: middle;
+    text-align: center;
+}
+form label{
+    /* text-align: left; */
+    display: block;
+    float: left;
+    padding: 8px 0px 0px 10px;
+    font-weight: 600;
+}
+
+form input {
+    width: 95%;
+    vertical-align: middle;
+}
+
+
+.border-box{
+    margin:auto;
+    width: 50%;
+    /* border: 1px solid lightgray;
+    border-radius: 4px; */
+}
+
+.dead {
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    padding: 0.5rem;
+    background-color: white;
+    color: grey;
+  }
+  
+  .live {
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    padding: 0.5rem;
+    color: steelblue;
+    font-weight: bold;
+    text-decoration: underline;
+    background-color: rgb(185, 220, 248);
+  }
+  
