@@ -4,7 +4,7 @@ import Home from "./Home";
 import Profile from "./Profile"
 import Logout from './Logout'
 import UserContext from "./UserContext"
-import Goals from "./Goals";
+import NewGoal from "./NewGoal";
 
 const Routes =()=>{
 /* Home page is a simple welcome page
@@ -28,7 +28,7 @@ return(
     </Route>
 
     <Route exact path="/goals">
-        <Goals />
+        <NewGoal />
     </Route>
 
 

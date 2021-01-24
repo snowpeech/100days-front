@@ -20,28 +20,31 @@ const UserProvider = ({children}) => {
   useEffect(()=>{
       console.log("USER PROVIDER USEEFFECT RUN token", token)
     // check if username stored in token is valid
-    async function getUser(){
+    getUser(token);
+    async function getUser(token){
+      console.log("GET USER TOKEN", token, "_TOKEN",token._token)
       try {
         // let { id } = decode(token); //token has email, password, goal_id, id (user's id)
         let decodedToken = decode(token)
-        console.log(decodedToken,"DECODED TOKEN")
-        let {id, goals} = decodedToken;
-        console.log("ID AND GOALS?", id, goals)
-        let currentUser = await ApiHelper.getUser(id);
-        // setStoredUser(currentUser);
-        // console.log("APP.js storedUser",storedUser)
-        // setStoredUser(JSON.stringify(currentUser));
-        console.log("before",currentUser[0])
-        setStoredUser({...currentUser[0],goals});
-        console.log("after",storedUser)
-        // console.log("currentUser! in App", storedUser);
+        console.log(decodedToken,"DECODED TOKEN") //usually null??? 
+        if(decodedToken){
+          let {id, goals} = decodedToken;
+          console.log("ID AND GOALS?", id, goals)
+          let currentUser = await ApiHelper.getUser(id);
+          // setStoredUser(currentUser);
+          // console.log("APP.js storedUser",storedUser)
+          // setStoredUser(JSON.stringify(currentUser));
+          console.log("before",currentUser[0])
+          setStoredUser({...currentUser[0],goals});
+          console.log("after",storedUser)
+          
+          // console.log("currentUser! in App", storedUser);
+        }
       } catch (err) {
           console.error("error",err)
         setStoredUser(null);
       }
     }
-    getUser();
-    
   },[token,setStoredUser]);
 
 

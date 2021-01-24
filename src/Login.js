@@ -15,8 +15,10 @@ const [formData,handleChange, resetFormData] = useFields(
 
 const handleLogin = async (evt) =>{
     evt.preventDefault();
+    console.log("handle login")
     const {email, password} = formData;
     let _token= await ApiHelper.login(email,password);
+    console.log("HANDLE LOGIN TOKEN",_token)
     setToken(_token);
     resetFormData();
     history.push("/")//push to profile...

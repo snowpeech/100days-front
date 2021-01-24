@@ -3,12 +3,14 @@ import {Link} from 'react-router-dom'
 import UserContext from "./UserContext"
 import './styles/Profile.css';
 import ApiHelper from "./ApiHelper";
+import EditProfile from "./EditProfile";
+import GoalItem from './GoalItem';
 
 const Profile = () => {
     //display user info. Allow to edit.
     //also list goals. And allow to edit
     const {storedUser} = useContext(UserContext);
-    const { email, first_name, last_name, gender, location, goals } = storedUser
+    const { id, email, first_name, last_name, gender, location, goals } = storedUser //note: gender isn't
     console.log("storedUser", storedUser);
 
     const [userGoals, setUserGoals] = useState("");
@@ -25,12 +27,18 @@ const Profile = () => {
             console.log("PROFILE JS GOAL INFO",res.goals)
             setUserGoals(res.goals);//return all goals' info: id, userId, goal (str), start_day, user_def1, 2,3
         }
-        console.log("hi use effect")
     },[])
+
+    //toggle edit user form 
+
+    const [showEdit,setShowEdit] = useState(false);
+    const toggleEdit = () => {setShowEdit(!showEdit)}
 
     return(<>
         <h1>Profile Page</h1>
-        <div class="profile">
+        <button onClick={toggleEdit}>Edit Profile</button>
+        {showEdit ? <EditProfile id={id} first_name={first_name} last_name={last_name} location={location} /> :
+        <div className="profile">
             <div>
                 <b>Name:</b> <span>{first_name} {last_name}</span>
             </div>
@@ -41,12 +49,17 @@ const Profile = () => {
                 <b>Location:</b> <span>{location}</span>
             </div>
         </div>
+        }
+        {/* <form class="edit-profile" onSubmit={handleSubmit}>
+        <button type="submit">Update Profile</button>
+        </form> */}
 
         <h2>Goals</h2>
-        {goals.length === 0 ?  
+        {goals.length === 0 || goals[0] === null ?  
             <div>No goal started? Let's fix that --> <Link to="/goals">Create a new goal</Link></div> :
             <div>{userGoals ? 
-                userGoals.map((g => <div>"{g.goal}" started on {g.start_day.slice(0,10)}</div>)) : 
+                // userGoals.map(g => <div>"{g.goal}" started on {g.start_day.slice(0,10)}</div>) : 
+                userGoals.map(g => <GoalItem key ={g.goal_id} goalObj = {g}/>) : 
                         <div>Loading goal info...</div>}</div>}
 
                 

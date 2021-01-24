@@ -17,6 +17,9 @@ if(storedUser){
         <NavLink exact to="/profile" className="navbar-brand">
             Profile
         </NavLink>
+        <NavLink exact to="/goals" className="navbar-brand">
+            Goals
+        </NavLink>
         <NavLink exact to="/logout" className="navbar-brand">
             Log out
         </NavLink>        
