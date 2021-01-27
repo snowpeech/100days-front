@@ -4,6 +4,7 @@ import Navbar from "./Navbar"
 import Routes from "./Routes"
 import './styles/App.css';
 import UserProvider from "./UserProvider"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (<BrowserRouter>

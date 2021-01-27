@@ -2,12 +2,17 @@ import React,{useContext} from "react"; //import {useContext} later
 import { NavLink} from 'react-router-dom';
 import "./styles/Navbar.css"
 import UserContext from "./UserContext"
+var dayjs = require('dayjs');
 
 const  Navbar=()=>{
     // //before auth, default loggedIn = true for dev
     const {storedUser} = useContext(UserContext);
 
 if(storedUser){
+    let startDay = dayjs(storedUser["start_days"][0])
+    let dayDiff =  dayjs().diff(startDay,'day')
+        
+
     return(<div className="Navbar">
         <h1>Logged In</h1>
         <NavLink exact to="/" className="navbar-brand">
@@ -20,6 +25,11 @@ if(storedUser){
         <NavLink exact to="/goals" className="navbar-brand">
             Goals
         </NavLink>
+
+        <NavLink exact to={`/journal/${dayDiff}`} className="navbar-brand">
+            Today
+        </NavLink>
+
         <NavLink exact to="/logout" className="navbar-brand">
             Log out
         </NavLink>        

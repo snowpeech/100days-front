@@ -22,8 +22,6 @@ const NewGoal=()=>{
         user_def3:""})
         //start day as today
     const endDay = dayjs(formData.start_day).add(100, 'day').format('MMMM D, YYYY');
-    console.log("NOW DJS", dayjs(formData.start_day).add(100, 'day'))
-    
     
     //100 days = 24*60*60*1000 milisec //convert 
 
@@ -39,7 +37,7 @@ const NewGoal=()=>{
 
 
     return(<>
-        <form onSubmit={handleCreateGoal}>
+        <form onSubmit={handleCreateGoal} className="border-box">
             <h2>Create a Goal</h2>
             <div>
                 <p> Are you ready to chart your next 100-day journey? 

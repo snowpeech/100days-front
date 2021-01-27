@@ -2,18 +2,12 @@ import React from 'react';
 import useFields from "./hooks/useFields"
 import ApiHelper from './ApiHelper';
 
-
-//I'd like to import this as a Modal...
-const EditGoal = ({goalObj}) => {
 //goal, start_day, user_def1, user_def2, user_def3
-    console.log("EDIT GOAL OBJ", goalObj);
-//     const goalObj = { a: 1, b: 2, c: 3 };
+//setUserGoals & userGoals drilled from Profile.js
+const EditGoal = ({goalObj, setUserGoals, userGoals}) => {
 
     const { goal_id, ...INITIAL_STATE } = goalObj;
-// console.log(a); // 1
-// console.log(rest); // { b: 2, c: 3 }
 
-    // const INITIAL_STATE = {};
     for(let key in INITIAL_STATE){
         if(INITIAL_STATE[key] == null){
             INITIAL_STATE[key] = ""
@@ -23,7 +17,6 @@ const EditGoal = ({goalObj}) => {
         }
     }
     
-    console.log("THE INITIAL_STATE", INITIAL_STATE)
     // const [formData, setFormData] = useFields({goal:goalObj.goal, start_day:goalObj.start_day, user_def1:goalObj.user_def1, user_def2:goalObj.user_def2, user_def3:goalObj.user_def3})
     const [formData, setFormData] = useFields(INITIAL_STATE)
     const handleSubmit = async (evt) => {
@@ -32,11 +25,17 @@ const EditGoal = ({goalObj}) => {
         // let res = await ApiHelper.updateGoal(goal, start_day, user_def1, user_def2, user_def3);
         //close modal and go back to goals?
         let res = await ApiHelper.updateGoal(goalObj.goal_id, formData);
+        //NEED TO UPDATE PARENT FOR RE-RENDER WITH NEW DATA
         console.log("EDIT GOAL JS RES", res)
+        //filter out usergoals. replace with the goalId. 
+        console.log("USERGOALS PREMAP", userGoals)
+        let newUserGoals = userGoals.map(g => g.goal_id === goalObj.goal_id ? {...formData, goal_id:goalObj.goal_id} : g)
+        console.log("USERGOALS POST MAP", newUserGoals)
+        setUserGoals(newUserGoals)
     }
 
     return(
-        <form onSubmit = {handleSubmit}>
+        <form onSubmit = {handleSubmit} className="border-box">
             <div>
                 <label htmlFor="goal">Goal </label>
                 <input 

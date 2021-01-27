@@ -21,7 +21,7 @@ const EditProfile=({id,first_name, last_name,location})=>{
 
     return(<>
     <h2>Edit Profile</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="border-box">
             
             <div>
                 <label htmlFor="first_name">First Name </label>

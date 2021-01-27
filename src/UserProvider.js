@@ -24,21 +24,14 @@ const UserProvider = ({children}) => {
     async function getUser(token){
       console.log("GET USER TOKEN", token, "_TOKEN",token._token)
       try {
-        // let { id } = decode(token); //token has email, password, goal_id, id (user's id)
         let decodedToken = decode(token)
-        console.log(decodedToken,"DECODED TOKEN") //usually null??? 
+        
         if(decodedToken){
-          let {id, goals} = decodedToken;
-          console.log("ID AND GOALS?", id, goals)
+          let {id, goals,start_days} = decodedToken;
           let currentUser = await ApiHelper.getUser(id);
-          // setStoredUser(currentUser);
-          // console.log("APP.js storedUser",storedUser)
-          // setStoredUser(JSON.stringify(currentUser));
-          console.log("before",currentUser[0])
-          setStoredUser({...currentUser[0],goals});
-          console.log("after",storedUser)
-          
-          // console.log("currentUser! in App", storedUser);
+      
+          setStoredUser({...currentUser[0], goals,start_days}); //set storedUser to uesrInfo + goals & start days
+      
         }
       } catch (err) {
           console.error("error",err)

@@ -14,8 +14,8 @@ const Signup=()=>{
     const [formData, setFormData, resetFormData] = useFields({email:"", password:"", first_name:"", last_name:""})
     
     const handleSubmit = async (evt)=>{
-        const {email, password, first_name, last_name} = formData
         evt.preventDefault();
+        const {email, password, first_name, last_name} = formData
         let _token = await ApiHelper.signup(email, password, first_name,last_name);
         setToken(_token);
         resetFormData();

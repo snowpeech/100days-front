@@ -11,7 +11,7 @@ const Profile = () => {
     //also list goals. And allow to edit
     const {storedUser} = useContext(UserContext);
     const { id, email, first_name, last_name, gender, location, goals } = storedUser //note: gender isn't
-    console.log("storedUser", storedUser);
+    console.log("storedUser in Profile", storedUser);
 
     const [userGoals, setUserGoals] = useState("");
 
@@ -27,7 +27,7 @@ const Profile = () => {
             console.log("PROFILE JS GOAL INFO",res.goals)
             setUserGoals(res.goals);//return all goals' info: id, userId, goal (str), start_day, user_def1, 2,3
         }
-    },[])
+    },[goals.length])
 
     //toggle edit user form 
 
@@ -50,16 +50,13 @@ const Profile = () => {
             </div>
         </div>
         }
-        {/* <form class="edit-profile" onSubmit={handleSubmit}>
-        <button type="submit">Update Profile</button>
-        </form> */}
 
         <h2>Goals</h2>
         {goals.length === 0 || goals[0] === null ?  
             <div>No goal started? Let's fix that --> <Link to="/goals">Create a new goal</Link></div> :
             <div>{userGoals ? 
                 // userGoals.map(g => <div>"{g.goal}" started on {g.start_day.slice(0,10)}</div>) : 
-                userGoals.map(g => <GoalItem key ={g.goal_id} goalObj = {g}/>) : 
+                userGoals.map(g => <GoalItem key ={g.goal_id} goalObj = {g} setUserGoals={setUserGoals} userGoals={userGoals}/>) : 
                         <div>Loading goal info...</div>}</div>}
 
                 
