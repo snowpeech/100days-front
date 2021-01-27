@@ -21,17 +21,19 @@ const UserProvider = ({children}) => {
       console.log("USER PROVIDER USEEFFECT RUN token", token)
     // check if username stored in token is valid
     getUser(token);
+
     async function getUser(token){
-      console.log("GET USER TOKEN", token, "_TOKEN",token._token)
+      console.log("GET USER TOKEN", token)
       try {
         let decodedToken = decode(token)
         
         if(decodedToken){
+          console.log("TOKEN DECODED!", decodedToken)
           let {id, goals,start_days} = decodedToken;
           let currentUser = await ApiHelper.getUser(id);
       
           setStoredUser({...currentUser[0], goals,start_days}); //set storedUser to uesrInfo + goals & start days
-      
+          console.log("should be the new stored user", {...currentUser[0], goals,start_days})
         }
       } catch (err) {
           console.error("error",err)

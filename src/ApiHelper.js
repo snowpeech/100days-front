@@ -36,7 +36,7 @@ class ApiHelper {
         return (await axios({
           method: "delete",
           url: `http://localhost:3001/${endpoint}`,
-          ["params"]: paramsOrData})).data;// tried removing this because we're not using a query string..
+          "params": paramsOrData})).data;// tried removing this because we're not using a query string..
       }
           // let res = axios.delete(`http://localhost:3001/${endpoint}`)
       
@@ -143,7 +143,7 @@ class ApiHelper {
 
     static async deleteGoal(goalId){
       console.log("API HELPER DELETE GOAL", goalId)
-      let res = await this.request(`goals/${goalId}`, "delete")
+      let res = await this.deleteRequest(`goals/${goalId}`)
       console.log(res)
       return res;
     }

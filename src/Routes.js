@@ -6,6 +6,7 @@ import Logout from './Logout'
 import UserContext from "./UserContext"
 import NewGoal from "./NewGoal";
 import Today from "./Today";
+import About from './About'
 const dayjs = require('dayjs');
 
 const Routes =()=>{
@@ -18,11 +19,16 @@ Goals displays Goal information + allows to edit. May combine with  Profile page
     const {storedUser} = useContext(UserContext);
     // const {storedUser} = useContext(UserContext);
     if(storedUser){
+        if(storedUser["start_days"]){
 
-        let startDay = dayjs(storedUser["start_days"][0])
-        dayDiff =  dayjs().diff(startDay,'day')
+            console.log("NAVBAR STORED USER", storedUser)
+            let startDay = dayjs(storedUser["start_days"][0])
+            dayDiff =  dayjs().diff(startDay,'day')
+        }
+        // let startDay = dayjs(storedUser["start_days"][0])
+        // dayDiff =  dayjs().diff(startDay,'day')
         goalId = storedUser["goals"][0];
-        console.log("dayDif!!", dayDiff)
+        // console.log("dayDif!!", dayDiff)
     }
 
 return(
@@ -42,13 +48,18 @@ return(
         {/* <NewGoal /> */}
     </Route>
 
+    <Route exact path="/journal/NaN">
+        {storedUser ? <div>Let's not get too carried away and create a goal before journaling</div> : <Redirect to="/" /> } 
+    </Route>
+
     <Route exact path="/journal/:day">
+        {console.log("JOURNAL PATH")}
         {storedUser ? <Today goalId = {goalId} /> : <Redirect to="/" /> } 
     </Route>
 
-    {/* <Route exact path="/journal/:day">
-        <Today goalId = {goalId}/>
-    </Route> */}
+    <Route exact path="/about">
+        <About />
+    </Route>
 
     <Route exact path="/">
         {storedUser ? <Redirect to="/profile" /> : <Home />} 

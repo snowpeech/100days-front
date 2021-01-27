@@ -7,10 +7,14 @@ var dayjs = require('dayjs');
 const  Navbar=()=>{
     // //before auth, default loggedIn = true for dev
     const {storedUser} = useContext(UserContext);
-
+    let dayDiff=0;
 if(storedUser){
-    let startDay = dayjs(storedUser["start_days"][0])
-    let dayDiff =  dayjs().diff(startDay,'day')
+    if(storedUser["start_days"]){
+
+        console.log("NAVBAR STORED USER", storedUser)
+        let startDay = dayjs(storedUser["start_days"][0])
+        dayDiff =  dayjs().diff(startDay,'day')
+    }
         
 
     return(<div className="Navbar">

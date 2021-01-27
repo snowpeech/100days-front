@@ -28,9 +28,9 @@ const NewGoal=()=>{
     const handleCreateGoal = async (evt) =>{
         evt.preventDefault();
         const {goal, start_day, user_def1, user_def2, user_def3} = formData;
-        let _token= await ApiHelper.createGoal(goal, start_day, user_def1, user_def2, user_def3);
-        console.log("Goal created! Token:", _token)
-        setToken(_token);
+        let res = await ApiHelper.createGoal(goal, start_day, user_def1, user_def2, user_def3);
+        console.log("Goal created! Token:", res._token)
+        setToken(res._token);
         resetFormData();
         history.push("/profile")//push to profile...
     }

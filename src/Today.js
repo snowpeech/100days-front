@@ -1,7 +1,5 @@
-import React,{useEffect,useState, useContext} from 'react';
+import React,{useEffect,useState} from 'react';
 import {useParams} from 'react-router-dom'
-import UserContext from "./UserContext"
-import AmPostForm from './AmPostForm';
 import AmPost from './AmPost'
 import EditAmPost from './EditAmPost'
 import ApiHelper from './ApiHelper';
@@ -9,6 +7,7 @@ const dayjs = require('dayjs');
 
 const Today = ({goalId})=>{
     let { day } = useParams();
+    console.log("TODAY JS day &G", day, goalId)
 
     const curDay = new dayjs().format('MMMM D, YYYY')
     //if today has posted info, then show it, else. show form
@@ -29,8 +28,7 @@ const Today = ({goalId})=>{
 
     return(<>
     <h1>{curDay}</h1>
-    { postInfo["gratitude_am"] || postInfo["ten"] ? <AmPost post={postInfo} setPostInfo={setPostInfo}/> : <EditAmPost edit={false} postInfo={blankAm} goalId ={goalId} day={day}/> }
-    {/* { postInfo ? <AmPost post={postInfo}/> : <AmPostForm edit={false} goalId ={goalId} day={day}/> } */}
+    { postInfo["gratitude_am"] || postInfo["ten"] ? <AmPost post={postInfo} setPostInfo={setPostInfo}/> : <EditAmPost edit={false} postInfo={blankAm} goalId ={goalId} day={day} setPostInfo={setPostInfo}/> }
     </>)
 }
 

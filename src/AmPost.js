@@ -21,7 +21,7 @@ const AmPost = ({post, setPostInfo})=>{
     const handleShow = () => setShowEdit(true);
 
     return (<div>
-        <h2>Calendar date?</h2> 
+        <h2>AM</h2> 
         {/* <h4>Day {day} /100</h4> */}
 
         <Button variant="primary" onClick={handleShow}>

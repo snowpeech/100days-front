@@ -1,5 +1,4 @@
-import React, { useEffect} from 'react';
-// import {useHistory} from 'react-router-dom';
+import React from 'react';
 import useFields from "./hooks/useFields";
 import ApiHelper from './ApiHelper';
 
@@ -12,13 +11,16 @@ const EditAmPost = ({postInfo, edit, goalId, day, closeModal, setPostInfo})=>{
         if(edit){
             const {gratitude_am, big_goal, task1, task2, task3} = formData; //formData may have additional fields from other posttypes from API
             const postObj = {gratitude_am, big_goal, task1, task2, task3};
+            console.log("AM POST EDIT", postObj, "GO ID",+postInfo.goal_id)
             await ApiHelper.editAmPost(+postInfo.goal_id, day, postObj);
             // pass state up to parent so it updates..
             setPostInfo(postObj);
 
             closeModal();
         } else {
-            await ApiHelper.createAmPost(goalId, day, formData) 
+            console.log("AM POST SUBMIT", formData, "GO_ID & D",goalId, day)
+            await ApiHelper.createAmPost(goalId, day, formData);
+            setPostInfo(formData)
         }
             
         resetFormData();

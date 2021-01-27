@@ -19,7 +19,6 @@ const Profile = () => {
         //if goals.length>0 go find the goals
         if(goals.length > 0){
             loadGoals();
-            // const goalsDiv = userGoals.map((g => <div>{g.goal} started on {g.start_day}</div>))
         }
 
         async function loadGoals(){

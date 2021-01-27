@@ -1,9 +1,12 @@
-import React,{useState} from 'react';
+import React,{useState, useContext} from 'react';
 import Button from 'react-bootstrap/Button';
 import useFields from "./hooks/useFields"
 import ApiHelper from './ApiHelper';
+import UserContext from "./UserContext";
 
 const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
+    const {setToken} = useContext(UserContext)
+
     const [showEdit, setShowEdit] = useState(false);
 
     const handleClick =()=>{
@@ -35,7 +38,10 @@ const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
     }
 
     const deleteGoal =async ()=>{
-        let res = await ApiHelper.deleteGoal(goal_id, )
+        let res = await ApiHelper.deleteGoal(goal_id)
+        let newUserGoals = userGoals.map(g => g.goal_id === goalObj.goal_id ? "" : g)
+        setUserGoals(newUserGoals);
+        setToken(res._token)
     }
 
     const editGoalForm = <form onSubmit = {handleSubmit} className="border-box">
