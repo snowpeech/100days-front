@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-// import EditGoal from './EditGoal'
+import Button from 'react-bootstrap/Button';
 import useFields from "./hooks/useFields"
 import ApiHelper from './ApiHelper';
 
@@ -32,6 +32,10 @@ const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
             setUserGoals(newUserGoals);
             setShowEdit(!showEdit);
         }
+    }
+
+    const deleteGoal =async ()=>{
+        let res = await ApiHelper.deleteGoal(goal_id, )
     }
 
     const editGoalForm = <form onSubmit = {handleSubmit} className="border-box">
@@ -87,7 +91,9 @@ const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
     <div>
         "{goalObj.goal}" started on {goalObj.start_day.slice(0,10)}
 
-        <button onClick={handleClick}>Edit Goal</button>
+        <Button onClick={handleClick} variant="secondary" >Edit Goal</Button>
+
+        <Button onClick={deleteGoal} variant="danger" >Delete Goal</Button>
 
         {showEdit ? editGoalForm : ""}
     </div>

@@ -13,9 +13,9 @@ const AmPost = ({post, setPostInfo})=>{
         setShowEdit(false);
     }
 
-    const deletePost = async (goalId, day) => {
-      console.log("DELETE POST INPUT",goalId, day) //dunno why goalId s undefined...
-      let res = await ApiHelper.deletePost(goalId, day,"am")
+    const deletePost = async (goalid, day) => {
+      console.log("DELETE POST INPUT",goalid, day) //dunno why goalId s undefined...
+      let res = await ApiHelper.deletePost(goalid, day,"am")
       console.log("Delete post", res)
     }
     const handleShow = () => setShowEdit(true);
@@ -27,7 +27,7 @@ const AmPost = ({post, setPostInfo})=>{
         <Button variant="primary" onClick={handleShow}>
         Edit Post <i className="fas fa-edit"></i>
         </Button>
-        <Button onClick = {()=>deletePost(goalid,day)}>Delete Post</Button>
+        <Button  variant="danger" onClick = {()=>deletePost(goalid,day)}>Delete Post</Button>
 
         <Modal show={showEdit} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>

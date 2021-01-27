@@ -24,6 +24,29 @@ class ApiHelper {
         throw Array.isArray(message) ? message : [message];
       }
     }
+
+
+    static async deleteRequest(endpoint, paramsOrData = {}) {
+      const token = window.localStorage.getItem('_token');
+      //sets the token: 
+      paramsOrData._token = token;
+      console.debug("API Helper:", endpoint, paramsOrData);
+  
+      try {
+        return (await axios({
+          method: "delete",
+          url: `http://localhost:3001/${endpoint}`,
+          ["params"]: paramsOrData})).data;// tried removing this because we're not using a query string..
+      }
+          // let res = axios.delete(`http://localhost:3001/${endpoint}`)
+      
+  
+      catch(err) {
+        console.error("API Error:", err.response);
+        let message = err.response.data.message;
+        throw Array.isArray(message) ? message : [message];
+      }
+    }
     /*User actions */
     
     static async getUserGoals(){
@@ -94,10 +117,12 @@ class ApiHelper {
       // let res = await this.request(`posts/${goalId}/${day}/${postType}`, "delete")
       // console.log(res)
       // return res;
-      console.log("DELETE POST APIHELPER", goalId, day, postType)
-      const token = window.localStorage.getItem('_token');
-      console.log("DELETE TOKN", token)
-      let res = await axios.delete(`posts/${goalId}/${day}/${postType}`,{_token:token})
+      // console.log("DELETE POST APIHELPER", goalId, day, postType)
+      // const token = window.localStorage.getItem('_token');
+      // console.log("DELETE TOKN", token)
+      // let res = await axios.delete(`posts/${goalId}/${day}/${postType}`,{_token:token})
+      let res = await this.deleteRequest(`posts/${goalId}/${day}/${postType}`)
+      console.log("DELTE POST RES", res)
       return res;
     }
 
@@ -116,9 +141,9 @@ class ApiHelper {
       return res;
     }
 
-    static async deleteGoal(goalId, goalObj){
-      console.log("API HELPER UPDATE GOAL", goalId, goalObj)
-      let res = await this.request(`goals/${goalId}`, goalObj,"patch")
+    static async deleteGoal(goalId){
+      console.log("API HELPER DELETE GOAL", goalId)
+      let res = await this.request(`goals/${goalId}`, "delete")
       console.log(res)
       return res;
     }
