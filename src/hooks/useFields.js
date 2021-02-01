@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 
 //can pass in validations or use Formik..
-
+/*custom hook to handle forms. Returns formData, handleChange (aka setFormData) and reset form */
 const useFields =(initialState)=>{
     const [formData, setFormData] = useState(initialState);
 

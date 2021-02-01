@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useContext} from "react";
+import UserContext from "./UserContext"
 import {useHistory} from "react-router-dom";
 import useFields from "./hooks/useFields"
 import ApiHelper from './ApiHelper';
@@ -6,6 +7,7 @@ import ApiHelper from './ApiHelper';
 //passing info down instead of grabbing from Context
 const EditProfile=({id,first_name, last_name,location})=>{
     const history = useHistory();
+    const {storedUser,setStoredUser} = useContext(UserContext);
 
     const [formData, setFormData, resetFormData] = useFields({first_name, last_name,location})
     
@@ -17,6 +19,7 @@ const EditProfile=({id,first_name, last_name,location})=>{
         resetFormData();
         alert("Account Updated!")
         history.push("/") //to go to profile page or something
+        setStoredUser({...storedUser,first_name, last_name, location })
     }
 
     return(<>

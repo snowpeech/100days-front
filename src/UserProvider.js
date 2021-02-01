@@ -12,14 +12,13 @@ const UserProvider = ({children}) => {
     // const [currentUser,setCurrentUser] = useLocalStorage('user',null);
 
     //storedUser is in Context
-    const [storedUser, setStoredUser ]= useState(null) //changing storedUser to keep in here as state. not using local storage
+  const [storedUser, setStoredUser ]= useState(null) //changing storedUser to keep in here as state. not using local storage
     //token is stored in Local Storage
-  const [token, setToken] =useLocalStorage('_token',""); //token has email, password, goal_id, user_id
+  const [token, setToken] =useLocalStorage('_token',""); //token has email, password, goals [], user_id, (goals') start_days[]
 // //pass setToken to login and signUp
 
   useEffect(()=>{
-      console.log("USER PROVIDER USEEFFECT RUN token", token)
-    // check if username stored in token is valid
+
     getUser(token);
 
     async function getUser(token){

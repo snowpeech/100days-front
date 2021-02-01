@@ -1,46 +1,40 @@
 import React from 'react';
 import useFields from "./hooks/useFields";
 import ApiHelper from './ApiHelper';
+import Button from 'react-bootstrap/Button'
 
-const EditAmPost = ({postInfo, edit, goalId, day, closeModal, setPostInfo})=>{
+const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
+    const {gratitude_pm, obstacle1,obstacle2,obstacle3, solution1, solution2, solution3, discipline, overall_day, user_def1, user_def2, user_def3, reflect, goal_id, day, ...amPost} = postInfo;
+   
+    const [formData, setFormData, resetFormData] = useFields(amPost);
 
-    const [formData, setFormData, resetFormData] = useFields(postInfo);
-
-    const handleSubmit = async (evt)=>{
+    console.log("all the edit things",postInfo, edit, goalId, day)
+    const handleAmSubmit = async (evt)=>{
         evt.preventDefault();
         if(edit){
             const {gratitude_am, big_goal, task1, task2, task3} = formData; //formData may have additional fields from other posttypes from API
-            const postObj = {gratitude_am, big_goal, task1, task2, task3};
-            console.log("AM POST EDIT", postObj, "GO ID",+postInfo.goal_id)
-            await ApiHelper.editAmPost(+postInfo.goal_id, day, postObj);
+            const postObj = {gratitude_am, big_goal, task1, task2, task3}; //removing goal_id and day from postObj?
+            console.log("AM POST EDIT", postObj, "GOAL ID",+postInfo.goal_id, "PASSED IN?", goalId)
+            // console.log("DAY DIFF", dayDiff, "DAY", day)
+            await ApiHelper.editPost(+postInfo.goal_id, day, "am", postObj);
             // pass state up to parent so it updates..
-            setPostInfo(postObj);
+            setPostInfo({...postInfo, goalId, day, gratitude_am, big_goal, task1, task2, task3});
 
             closeModal();
         } else {
             console.log("AM POST SUBMIT", formData, "GO_ID & D",goalId, day)
-            await ApiHelper.createAmPost(goalId, day, formData);
-            setPostInfo(formData)
+            await ApiHelper.createPost(goalId, day, "am",formData);
+            postInfo= {...postInfo,...formData};
+            console.log("New post info", postInfo);
+            // console.log("DAY DIFF", dayDiff, "DAY", day)
+            setPostInfo(postInfo)
         }
             
         resetFormData();
-        //ideally on submit, it would come back to this page with everything all filled out and pretty.
     }
-    // const {gratitude_am, big_goal, task1, task2, task3} = formData;
-    // for(let key in INITIAL_STATE){
-    //     if(INITIAL_STATE[key] == null){
-    //         INITIAL_STATE[key] = ""
-    //     } 
-    //     if(key==='start_day'){
-    //         INITIAL_STATE.start_day = INITIAL_STATE.start_day.split('T')[0] 
-    //     }
-    // }
-    // const startDay = dayjs(storedUser["start_days"][0])
-    // console.log("GOAL ONE", dayjs().diff(startDay,'day'))
-    // const dayDiff =  dayjs().diff(startDay,'day')
+
     return (<div>
-        <h2>Today is a good day</h2>
-        <form onSubmit={handleSubmit} className="border-box">
+        <form onSubmit={handleAmSubmit} className="border-box">
             <div>
                 <label htmlFor="gratitude_am">Today, I am grateful for: </label>
                 <input 
@@ -48,6 +42,7 @@ const EditAmPost = ({postInfo, edit, goalId, day, closeModal, setPostInfo})=>{
                     name = "gratitude_am"
                     value ={formData.gratitude_am}
                     onChange = {setFormData}
+                    required
                 />
             </div>
             <div>
@@ -57,6 +52,7 @@ const EditAmPost = ({postInfo, edit, goalId, day, closeModal, setPostInfo})=>{
                     name = "big_goal"
                     value ={formData.big_goal}
                     onChange = {setFormData}
+                    required
                 />
             </div>
             <div>By completing these tasks, I will be closer to my goal:</div>
@@ -67,6 +63,7 @@ const EditAmPost = ({postInfo, edit, goalId, day, closeModal, setPostInfo})=>{
                     placeholder="1."
                     value ={formData.task1}
                     onChange = {setFormData}
+                    required
                 />
             </div>
             <div>

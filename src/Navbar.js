@@ -30,6 +30,10 @@ if(storedUser){
             Goals
         </NavLink>
 
+        <NavLink exact to="/about" className="navbar-brand">
+            About
+        </NavLink>
+
         <NavLink exact to={`/journal/${dayDiff}`} className="navbar-brand">
             Today
         </NavLink>
@@ -46,11 +50,9 @@ else {
         <NavLink exact to="/" className="navbar-brand">
             100 Days
         </NavLink>
-        {/* <NavLink exact to="/login" className="navbar-brand">
-            Log In or Sign Up
-        </NavLink> */}
-        {/* Add an About link? */}
-        
+        <NavLink exact to="/about" className="navbar-brand">
+            About
+        </NavLink>
     </div>
     )
 }

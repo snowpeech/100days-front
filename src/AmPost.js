@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './styles/AmPost.css'
@@ -6,46 +7,50 @@ import EditAmPost from './EditAmPost'
 import ApiHelper from './ApiHelper';
 
 const AmPost = ({post, setPostInfo})=>{
-    const {gratitude_am, big_goal, task1, task2, task3, goalid, day} = post
+    
+    const {gratitude_am, big_goal, task1, task2, task3, goal_id, day} = post
 
     const [showEdit, setShowEdit] = useState(false);
     const handleClose = () => {
         setShowEdit(false);
     }
 
-    const deletePost = async (goalid, day) => {
-      console.log("DELETE POST INPUT",goalid, day) //dunno why goalId s undefined...
-      let res = await ApiHelper.deletePost(goalid, day,"am")
+    const deletePost = async () => {
+      let res = await ApiHelper.deletePost(post.goal_id, day,"am")
       console.log("Delete post", res)
+      //update AM Post/ today?
+      const {gratitude_am, big_goal, task1, task2, task3,...keepVals} =post
+      let newPost = {keepVals}
+      console.log("NEWPOST & KEEPER", keepVals)
+      setPostInfo(keepVals)
     }
     const handleShow = () => setShowEdit(true);
 
-    return (<div>
-        <h2>AM</h2> 
-        {/* <h4>Day {day} /100</h4> */}
+    return (<div>   
+        <h3>AM</h3> 
 
         <Button variant="primary" onClick={handleShow}>
         Edit Post <i className="fas fa-edit"></i>
         </Button>
-        <Button  variant="danger" onClick = {()=>deletePost(goalid,day)}>Delete Post</Button>
+        <Button  variant="danger" onClick = {deletePost}><i className="far  fa-trash-alt"></i></Button>
 
         <Modal show={showEdit} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
           <Modal.Title>Edit Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <EditAmPost postInfo={post} edit={true} goalId ={goalid} day={day} closeModal = {handleClose} setPostInfo={setPostInfo}/>
+            <EditAmPost postInfo={post} edit={true} goalId ={goal_id} day={day} closeModal = {handleClose} setPostInfo={setPostInfo}/>
         </Modal.Body>
       </Modal>
 
 
         <div className="border-box">
-            {/* <Link>Edit AM post</Link> */}
-        <h4>Today, I am grateful for: </h4>
+
+        <h5>Today, I am grateful for: </h5>
         <p>{gratitude_am}</p>
-        <h4>My 100-day goal is: </h4>
+        <h5>My 100-day goal is: </h5>
         <p>{big_goal}</p>
-        <h4>Today's tasks:</h4>
+        <h5>Today's tasks:</h5>
             <ol>
                 {task1 ? <li>{task1}</li>: ""}
                 {task2 ? <li>{task2}</li>: ""}

@@ -10,8 +10,8 @@ const Profile = () => {
     //display user info. Allow to edit.
     //also list goals. And allow to edit
     const {storedUser} = useContext(UserContext);
-    const { id, email, first_name, last_name, gender, location, goals } = storedUser //note: gender isn't
     console.log("storedUser in Profile", storedUser);
+    const { id, email, first_name, last_name, location, goals } = storedUser 
 
     const [userGoals, setUserGoals] = useState("");
 
@@ -54,7 +54,7 @@ const Profile = () => {
         {goals.length === 0 || goals[0] === null ?  
             <div>No goal started? Let's fix that --> <Link to="/goals">Create a new goal</Link></div> :
             <div>{userGoals ? 
-                // userGoals.map(g => <div>"{g.goal}" started on {g.start_day.slice(0,10)}</div>) : 
+                
                 userGoals.map(g => <GoalItem key ={g.goal_id} goalObj = {g} setUserGoals={setUserGoals} userGoals={userGoals}/>) : 
                         <div>Loading goal info...</div>}</div>}
 

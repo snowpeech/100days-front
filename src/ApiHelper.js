@@ -87,32 +87,32 @@ class ApiHelper {
       return res.post;
     }
     
-    static async createAmPost(goalId, day, postObj){
-      // /:goalid/:day/:posttype
-      let res = await this.request(`posts/${goalId}/${day}/am`,postObj, "post")
-      console.log(res)
-      return res;
-    }
-
+    // static async createAmPost(goalId, day, postObj){
+    //   // /:goalid/:day/:posttype
+    //   let res = await this.request(`posts/${goalId}/${day}/am`,postObj, "post")
+    //   console.log(res)
+    //   return res;
+    // }
+//////////
     static async createPost(goalId, day,postType, postObj){
       // /:goalid/:day/:posttype
       let res = await this.request(`posts/${goalId}/${day}/${postType}`,postObj, "post")
       console.log(res)
       return res;
     }
-
-    static async editAmPost(goalId,day,postObj){
-      let res = await this.request(`posts/${goalId}/${day}/am`,postObj, "patch")
-      console.log(res)
-      return res;
-    }
-
+////////////
+    // static async editAmPost(goalId,day,postObj){
+    //   let res = await this.request(`posts/${goalId}/${day}/am`,postObj, "patch")
+    //   console.log(res)
+    //   return res;
+    // }
+////////////
     static async editPost(goalId,day,postType, postObj){
       let res = await this.request(`posts/${goalId}/${day}/${postType}`,postObj, "patch")
       console.log(res)
       return res;
     }
-
+////////////
     static async deletePost(goalId,day,postType){
       // let res = await this.request(`posts/${goalId}/${day}/${postType}`, "delete")
       // console.log(res)

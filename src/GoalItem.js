@@ -39,7 +39,8 @@ const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
 
     const deleteGoal =async ()=>{
         let res = await ApiHelper.deleteGoal(goal_id)
-        let newUserGoals = userGoals.map(g => g.goal_id === goalObj.goal_id ? "" : g)
+        let newUserGoals = userGoals.filter(g => g.goal_id !== goalObj.goal_id )
+        console.log("NEW USERGOALS after delete", newUserGoals)
         setUserGoals(newUserGoals);
         setToken(res._token)
     }

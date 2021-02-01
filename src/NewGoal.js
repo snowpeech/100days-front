@@ -9,9 +9,8 @@ const dayjs = require('dayjs');
 //Creates a new goal
 const NewGoal=()=>{
     const {setToken} = useContext(UserContext)
-    //FYI. Token needs to be updated with new goal.
     const history = useHistory();
-    //need to create date and format to yyyy-mm-dd
+    
     const today = new Date().toISOString().split('T')[0]
 
     const [formData,handleChange, resetFormData] = useFields(
