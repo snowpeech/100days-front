@@ -15,22 +15,15 @@ const Routes =()=>{
 Login allows user to log in or sign up
 Profile displays profile information + allows user to edit  
 Goals displays Goal information + allows to edit. May combine with  Profile page
-*/  console.log("ROUTES WAS HERE")
-    let dayDiff, goalId;
-    const {storedUser} = useContext(UserContext);
+*/
+    let dayDiff;
+    const {storedUser, startDay,goalId} = useContext(UserContext);
     console.log("storedUser FROM ROUTES", storedUser)
-    if(storedUser){ 
-        if(storedUser["start_days"]){
-
-            console.log("NAVBAR STORED USER", storedUser)
-            let startDay = dayjs(storedUser["start_days"][0])
-            dayDiff =  dayjs().diff(startDay,'day')
-        }
-        // let startDay = dayjs(storedUser["start_days"][0])
-        // dayDiff =  dayjs().diff(startDay,'day')
-        goalId = storedUser["goals"][0];
-        // console.log("dayDif!!", dayDiff)
+    if(startDay){ 
+        dayDiff =  dayjs().diff(startDay,'day')
     }
+        // goalId = storedUser["goals"][0];
+    
 
 
 return(<Switch>

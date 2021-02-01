@@ -12,10 +12,13 @@ const UserProvider = ({children}) => {
     // const [currentUser,setCurrentUser] = useLocalStorage('user',null);
 
     //storedUser is in Context
-  const [storedUser, setStoredUser ]= useState(null) //changing storedUser to keep in here as state. not using local storage
+  const [storedUser, setStoredUser ]= useState(null) //changing storedUser to keep in here as state
     //token is stored in Local Storage
   const [token, setToken] =useLocalStorage('_token',""); //token has email, password, goals [], user_id, (goals') start_days[]
 // //pass setToken to login and signUp
+  const [goalId, setGoalId] = useLocalStorage('_goalId',"");
+  const [startDay, setStartDay] = useLocalStorage('_startDay',"");
+  
 
   useEffect(()=>{
 
@@ -30,9 +33,10 @@ const UserProvider = ({children}) => {
           console.log("TOKEN DECODED!", decodedToken)
           let {id, goals,start_days} = decodedToken;
           let currentUser = await ApiHelper.getUser(id);
-      
-          setStoredUser({...currentUser[0], goals,start_days}); //set storedUser to uesrInfo + goals & start days
-          console.log("should be the new stored user", {...currentUser[0], goals,start_days})
+          setGoalId(goals[0]);
+          setStartDay(start_days[0])
+          setStoredUser({...currentUser[0]}); //set storedUser to uesrInfo 
+          console.log("should be the new stored user", {...currentUser[0]})
         }
       } catch (err) {
           console.error("error",err)

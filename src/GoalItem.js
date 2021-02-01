@@ -1,16 +1,21 @@
 import React,{useState, useContext} from 'react';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import useFields from "./hooks/useFields"
 import ApiHelper from './ApiHelper';
 import UserContext from "./UserContext";
 
 const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
-    const {setToken} = useContext(UserContext)
+    const {setToken, setGoalId} = useContext(UserContext)
 
     const [showEdit, setShowEdit] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     const handleClick =()=>{
         setShowEdit(!showEdit)
+    }
+    const handleModalClose = () => {
+        setShowDelete(false);
     }
 
     const { goal_id, ...INITIAL_STATE } = goalObj; //remove goal_id from inital state.
@@ -36,13 +41,16 @@ const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
             setShowEdit(!showEdit);
         }
     }
+    
 
     const deleteGoal =async ()=>{
         let res = await ApiHelper.deleteGoal(goal_id)
         let newUserGoals = userGoals.filter(g => g.goal_id !== goalObj.goal_id )
         console.log("NEW USERGOALS after delete", newUserGoals)
         setUserGoals(newUserGoals);
-        setToken(res._token)
+        setToken(res._token);
+        localStorage.removeItem('_goalId');
+        localStorage.removeItem('_startDay');
     }
 
     const editGoalForm = <form onSubmit = {handleSubmit} className="border-box">
@@ -100,9 +108,22 @@ const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
 
         <Button onClick={handleClick} variant="secondary" >Edit Goal</Button>
 
-        <Button onClick={deleteGoal} variant="danger" >Delete Goal</Button>
+        <Button onClick={()=>setShowDelete(true)} variant="danger" >Delete Goal</Button>
 
         {showEdit ? editGoalForm : ""}
+
+        {/* Modal for confirm delete */}
+        <Modal show={showDelete} onHide={handleModalClose} animation={true}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure you want to delete this goal?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+            Once you've deleted a goal, all the associated posts with it are gone. Forever.
+            <Button onClick={deleteGoal} variant="danger">Delete Goal</Button>
+            <Button>Keep Goal</Button>
+        </Modal.Body>
+      </Modal>
+
     </div>
     
     </>)

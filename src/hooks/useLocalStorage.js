@@ -1,6 +1,4 @@
 import {useState,useEffect} from 'react'; 
-
-
 /* local storage hook returning a value by key, and a way to change the value in local storage 
 ex: const [token, setToken] =useLocalStorage('_token',"") */
 

@@ -10,10 +10,9 @@ import './styles/Today.css'
 const dayjs = require('dayjs');
 
 const Today = ()=>{
-    const {storedUser} = useContext(UserContext);
-    console.log("TODAY STOREDUSER", storedUser)
-    const goalId = storedUser.goals[0];
-    const start_day = storedUser.start_days[0];
+    const {goalId,start_day} = useContext(UserContext); //not sure why this works?? I'm not exporting the values...
+    // const goalId = localStorage.get("_goalId");
+    // const start_day = localStorage.get("_startDay")
     let { day } = useParams();
     
     //change curday to startday + day from params using dayjs
@@ -22,7 +21,7 @@ const Today = ()=>{
     //if today has posted info, then show it, else. show form
     const [postInfo, setPostInfo] = useState({});
     
-    const [isAm, setIsAm] = useState(dayjs().hour() < 13); //should be Bool
+    const [isAm, setIsAm] = useState(dayjs().hour() < 13); //is a Bool
 
     const blankAm = {gratitude_am:"", big_goal:"", task1:"", task2:"", task3:""}
     const blankPm = {gratitude_pm:"",  obstacle1:"", obstacle2:"", obstacle3:"", solution1:"", solution2:"", solution3:"", discipline:"", overall_day:"", reflect:""}

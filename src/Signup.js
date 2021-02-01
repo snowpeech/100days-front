@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import {useHistory} from "react-router-dom";
+import useLocalStorage from './hooks/useLocalStorage'
 import useFields from "./hooks/useFields"
 import ApiHelper from './ApiHelper';
 import UserContext from "./UserContext"
@@ -9,8 +10,8 @@ import UserContext from "./UserContext"
 const Signup=()=>{
     //sign up form 
     const history = useHistory();
+    const {setToken, setStoredUser} = useContext(UserContext)
 
-    const {setToken} = useContext(UserContext)
     const [formData, setFormData, resetFormData] = useFields({email:"", password:"", first_name:"", last_name:""})
     
     const handleSubmit = async (evt)=>{
@@ -18,8 +19,11 @@ const Signup=()=>{
         const {email, password, first_name, last_name} = formData
         let _token = await ApiHelper.signup(email, password, first_name,last_name);
         setToken(_token);
+        setStoredUser({email,password,first_name,last_name})
+        // setStoredUser({...currentUser[0]})
         resetFormData();
         alert("Account Created!")
+        history.push("/profile")
         //history.push to go to profile page or something
     }
 
@@ -45,6 +49,17 @@ const Signup=()=>{
                     onChange = {setFormData}
                 />
             </div>
+            <div>
+                {/* put requirements for password here? */}
+                <label htmlFor ="password2">Re-Type Password </label>
+                <input  
+                    type="password"
+                    name = "password2"
+                    value ={formData.password2}
+                    onChange = {setFormData}
+                />
+            </div>
+            {formData.password !== formData.password2 ? <div>Passwords don't match</div> : ""}
             <div>
                 <label htmlFor="first_name">First Name </label>
             
