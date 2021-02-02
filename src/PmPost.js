@@ -17,9 +17,9 @@ const PmPost = ({post, setPostInfo})=>{
 
     const deletePost = async () => {
       let res = await ApiHelper.deletePost(post.goal_id, day,"pm")
+      console.log("delete post res", res)
       const {gratitude_pm, obstacle1,obstacle2,obstacle3, solution1, solution2, solution3, discipline, overall_day, reflect, ...keepVals} = post //user_def1, user_def2, user_def3,
-      // console.log("what does it do?",{...keepVals})
-      // setItems(items => [...items, newItem])
+      
       setPostInfo(keepVals) 
     }
     const handleShow = () => setShowEdit(true);
@@ -46,15 +46,15 @@ const PmPost = ({post, setPostInfo})=>{
             <p>{gratitude_pm}</p>
             <h5>I had these struggles: </h5>
             <ol>
-                {obstacle1 ? <li>{obstacle1}</li>: ""}
-                {obstacle2 ? <li>{obstacle2}</li>: ""}
-                {obstacle3 ? <li>{obstacle3}</li>: ""}
-            </ol>
+                {obstacle1 && <li>{obstacle1}</li>}
+                {obstacle2 && <li>{obstacle2}</li>}
+                {obstacle3 && <li>{obstacle3}</li>}
+            </ol> 
             <h5>My solutions to overcome those struggles: </h5>
             <ol>
-                {solution1 ? <li>{solution1}</li>: ""}
-                {solution2 ? <li>{solution2}</li>: ""}
-                {solution3 ? <li>{solution3}</li>: ""}
+                {solution1 && <li>{solution1}</li>}
+                {solution2 && <li>{solution2}</li>}
+                {solution3 && <li>{solution3}</li>}
             </ol>
             <h5>Overall, I'd rate my discipline for today as a {discipline} / 10</h5>
             <h5>Overall, I'd rate my day as a {overall_day} / 10</h5>

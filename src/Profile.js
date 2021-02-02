@@ -1,10 +1,11 @@
 import React,{useContext,useState, useEffect} from "react";
-import {Link} from 'react-router-dom'
+// import {Link} from 'react-router-dom'
 import UserContext from "./UserContext"
 import './styles/Profile.css';
 import ApiHelper from "./ApiHelper";
 import EditProfile from "./EditProfile";
 import GoalItem from './GoalItem';
+import NoGoal from "./NoGoal";
 
 const Profile = () => {
     //display user info. Allow to edit.
@@ -53,7 +54,7 @@ const Profile = () => {
 
             <h2>Goals</h2>
             {!goalId ?  
-                <div>No goal started? Let's fix that --> <Link to="/goals">Create a new goal</Link></div> :
+                <NoGoal/> :
 
                 <div>{userGoals ? 
                     
@@ -66,3 +67,4 @@ const Profile = () => {
 }
 
 export default Profile;
+

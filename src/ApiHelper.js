@@ -83,8 +83,8 @@ class ApiHelper {
     /*Day-post actions */
     static async getDayPosts(goalId,day){
       let res = await this.request(`posts/${goalId}/${day}`)
-      console.log("API HELER RES", res.post)
-      return res.post;
+      console.log("API HELPER RES", res)
+      return res;
     }
     
     static async createPost(goalId, day,postType, postObj){

@@ -33,8 +33,10 @@ const UserProvider = ({children}) => {
           console.log("TOKEN DECODED!", decodedToken)
           let {id, goals,start_days} = decodedToken;
           let currentUser = await ApiHelper.getUser(id);
-          setGoalId(goals[0]);
-          setStartDay(start_days[0])
+          if(goals[0]){
+            setGoalId(goals[0]);
+            setStartDay(start_days[0])
+          }
           setStoredUser({...currentUser[0]}); //set storedUser to uesrInfo 
           console.log("should be the new stored user", {...currentUser[0]})
         }

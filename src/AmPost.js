@@ -52,9 +52,9 @@ const AmPost = ({post, setPostInfo})=>{
         <p>{big_goal}</p>
         <h5>Today's tasks:</h5>
             <ol>
-                {task1 ? <li>{task1}</li>: ""}
-                {task2 ? <li>{task2}</li>: ""}
-                {task3 ? <li>{task3}</li>: ""}
+              {task1 && <li>{task1}</li>}
+              {task2 && <li>{task2}</li>}
+              {task3 && <li>{task3}</li>}
             </ol>
            
         </div>

@@ -23,10 +23,7 @@ const  Navbar=()=>{
                 Profile
             </NavLink>
             
-            {/* Maybe change So goals info will be here? AND DASHBOARD. 
-            latest post. 
-            Plotting metrics
-            List of struggles? List of solutions? Best moments? (thats a future feature)  */}
+            {/* Maybe change So goals info will be here?  */}
             <NavLink exact to="/goals" className="navbar-brand">
                 Goals
             </NavLink>

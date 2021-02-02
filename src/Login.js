@@ -1,7 +1,6 @@
 import React, {useContext} from "react";
 import {useHistory} from "react-router-dom";
 import useFields from "./hooks/useFields"
-import useLocalStorage from './hooks/useLocalStorage'
 import ApiHelper from './ApiHelper';
 import UserContext from "./UserContext";
 // import "./styles/Login.css"

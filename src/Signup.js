@@ -12,18 +12,22 @@ const Signup=()=>{
     const history = useHistory();
     const {setToken, setStoredUser} = useContext(UserContext)
 
-    const [formData, setFormData, resetFormData] = useFields({email:"", password:"", first_name:"", last_name:""})
+    const [formData, setFormData, resetFormData] = useFields({email:"", password:"", password2:"", first_name:"", last_name:""})
     
     const handleSubmit = async (evt)=>{
         evt.preventDefault();
-        const {email, password, first_name, last_name} = formData
-        let _token = await ApiHelper.signup(email, password, first_name,last_name);
-        setToken(_token);
-        setStoredUser({email,password,first_name,last_name})
-        // setStoredUser({...currentUser[0]})
-        resetFormData();
-        alert("Account Created!")
-        history.push("/profile")
+        if(formData.password == formData.password2 ){
+            const {email, password, first_name, last_name} = formData
+            let _token = await ApiHelper.signup(email, password, first_name,last_name);
+            setToken(_token);
+            setStoredUser({email,password,first_name,last_name})
+            // setStoredUser({...currentUser[0]})
+            resetFormData();
+            alert("Account Created!")
+            history.push("/profile")
+        } else {
+            alert("Passwords must match")
+        }
         //history.push to go to profile page or something
     }
 
