@@ -2,11 +2,11 @@ import React,{useState, useContext} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import useFields from "./hooks/useFields"
-import ApiHelper from './ApiHelper';
+import ApiHelper from './helpers/ApiHelper';
 import UserContext from "./UserContext";
 
 const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
-    const {setToken, setGoalId} = useContext(UserContext)
+    const {setToken} = useContext(UserContext)
 
     const [showEdit, setShowEdit] = useState(false);
     const [showDelete, setShowDelete] = useState(false);

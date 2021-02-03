@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import './styles/AmPost.css'
 import EditAmPost from './EditAmPost'
-import ApiHelper from './ApiHelper';
+import ApiHelper from './helpers/ApiHelper';
 
 const AmPost = ({post, setPostInfo})=>{
     
@@ -20,8 +20,7 @@ const AmPost = ({post, setPostInfo})=>{
       console.log("Delete post", res)
       //update AM Post/ today?
       const {gratitude_am, big_goal, task1, task2, task3,...keepVals} =post
-      let newPost = {keepVals}
-      console.log("NEWPOST & KEEPER", keepVals)
+
       setPostInfo(keepVals)
     }
     const handleShow = () => setShowEdit(true);

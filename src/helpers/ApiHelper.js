@@ -19,8 +19,11 @@ class ApiHelper {
       }
   
       catch(err) {
-        console.error("API Error:", err.response);
-        let message = err.response.data.message;
+        console.error("API Error:", err.response); 
+        let message = err.response.data.error.message;
+        // alert(message[0])
+        // console.log("apihelper!", err.response.data.error.message)
+        // alert(err.response.data.error.message)
         throw Array.isArray(message) ? message : [message];
       }
     }
@@ -47,8 +50,8 @@ class ApiHelper {
         throw Array.isArray(message) ? message : [message];
       }
     }
+
     /*User actions */
-    
     static async getUserGoals(){
       //user information is decoded from token
       let res = await this.request(`goals`);
@@ -86,6 +89,20 @@ class ApiHelper {
       console.log("API HELPER RES", res)
       return res;
     }
+
+    static async getMetrics(goalId,day){
+      //gets PM metrics for past 10 days from the date passed in (inclusive)
+      let res = await this.request(`posts/${goalId}/${day}/metrics`)
+      console.log("API HELPER getMetrics RES", res)
+      return res;
+    }
+
+    static async getRecentPosts(goalId){
+      //gets recent posts related to a goalid
+      let res = await this.request(`posts/${goalId}/latest`)
+      console.log("API HELPER RES getRECENT", res)
+      return res;
+    }
     
     static async createPost(goalId, day,postType, postObj){
     
@@ -101,13 +118,6 @@ class ApiHelper {
     }
 ////////////
     static async deletePost(goalId,day,postType){
-      // let res = await this.request(`posts/${goalId}/${day}/${postType}`, "delete")
-      // console.log(res)
-      // return res;
-      // console.log("DELETE POST APIHELPER", goalId, day, postType)
-      // const token = window.localStorage.getItem('_token');
-      // console.log("DELETE TOKN", token)
-      // let res = await axios.delete(`posts/${goalId}/${day}/${postType}`,{_token:token})
       let res = await this.deleteRequest(`posts/${goalId}/${day}/${postType}`)
       console.log("DELTE POST RES", res)
       return res;

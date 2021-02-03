@@ -1,6 +1,6 @@
 import React from 'react';
 import useFields from "./hooks/useFields";
-import ApiHelper from './ApiHelper';
+import ApiHelper from './helpers/ApiHelper';
 
 const EditPmPost = ({postInfo, edit, goalId, closePmModal, setPostInfo})=>{ //not bringing in day/getting it passed down
     const {gratitude_am, big_goal, task1, task2, task3, goal_id, day, ...pmPost} = postInfo // remove AM vars from form.
@@ -43,7 +43,7 @@ const EditPmPost = ({postInfo, edit, goalId, closePmModal, setPostInfo})=>{ //no
         resetPmFormData();
     }
 
-    return (<div>
+    return (<>
         <h3>PM</h3>
         <form onSubmit={handlePmSubmit} className="border-box">
             <div>
@@ -147,7 +147,7 @@ const EditPmPost = ({postInfo, edit, goalId, closePmModal, setPostInfo})=>{ //no
             </div>
             <button>Onward</button>
         </form>
-    </div>)
+    </>)
 }
 
 export default EditPmPost;

@@ -1,10 +1,8 @@
 import React,{useState} from 'react';
-
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-// import './styles/AmPost.css'
 import EditPmPost from './EditPmPost'
-import ApiHelper from './ApiHelper';
+import ApiHelper from './helpers/ApiHelper';
 
 const PmPost = ({post, setPostInfo})=>{
 

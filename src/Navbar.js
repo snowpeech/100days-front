@@ -6,15 +6,16 @@ var dayjs = require('dayjs');
 
 const  Navbar=()=>{
     // //before auth, default loggedIn = true for dev
-    const {storedUser, startDay} = useContext(UserContext);
-    let dayDiff=0;
+    const {storedUser} = useContext(UserContext);
+    let startDay = localStorage.getItem("_startDay");
     if(storedUser){
+        let dayDiff;
         if(startDay){
-            dayDiff =  dayjs().diff(startDay,'day')
+            dayDiff =  dayjs().diff(startDay,'day');
         }        
 
         return(<div className="Navbar">
-            <h1>Logged In</h1>
+            {/* <h1>Logged In</h1> */}
             <NavLink exact to="/" className="navbar-brand">
                 100 Days
             </NavLink>
@@ -43,7 +44,7 @@ const  Navbar=()=>{
     } else {
         return (
     <div className="Navbar">
-        <h1>Not Logged In</h1>
+        {/* <h1>Not Logged In</h1> */}
             <NavLink exact to="/" className="navbar-brand">
                 100 Days
             </NavLink>

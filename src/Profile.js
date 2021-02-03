@@ -2,18 +2,17 @@ import React,{useContext,useState, useEffect} from "react";
 // import {Link} from 'react-router-dom'
 import UserContext from "./UserContext"
 import './styles/Profile.css';
-import ApiHelper from "./ApiHelper";
+import ApiHelper from "./helpers/ApiHelper";
 import EditProfile from "./EditProfile";
 import GoalItem from './GoalItem';
 import NoGoal from "./NoGoal";
+import Spinner from 'react-bootstrap/Spinner'
 
 const Profile = () => {
     //display user info. Allow to edit.
     //also list goals. And allow to edit
     const {storedUser} = useContext(UserContext); //takes a second to come back from a page refresh...
     const goalId = localStorage.getItem("_goalId")
-    console.log("GOALID??", goalId)
-    console.log("storedUser in Profile", storedUser);
 
     const [userGoals, setUserGoals] = useState("");
 
@@ -32,11 +31,14 @@ const Profile = () => {
     const toggleEdit = () => {setShowEdit(!showEdit)}
 
     if(!storedUser){
-        return(<><h1>Profile Page</h1> <div>Loading...</div></>)
+        return(<><h1>Profile</h1> 
+                <Spinner animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+                </Spinner></>)
     } else {
         const { id, email, first_name, last_name, location } = storedUser 
         return(<>
-            <h1>Profile Page</h1>
+            <h1>Profile</h1>
             <button onClick={toggleEdit}>Edit Profile</button>
             {showEdit ? <EditProfile id={id} first_name={first_name} last_name={last_name} location={location} /> :
             <div className="profile">

@@ -1,47 +1,44 @@
-import React from 'react';
+import React,{useState} from 'react';
 import useFields from "./hooks/useFields";
-import ApiHelper from './ApiHelper';
+import ApiHelper from './helpers/ApiHelper';
 import './styles/EditTenPost.css'
-// import { Form } from 'formik';
-// import { useFormikContext, Formik, Form, Field } from 'formik';
 
 const EditTenPost = ({postInfo, edit, goalId, closeTenModal, setPostInfo})=>{ //not bringing in day/getting it passed down
-    console.log("INCOMING POST INFO TEN:", postInfo)
-    // const {accomplished, win1, win2, win3, win_plan1, win_plan2, win_plan3, bad1, bad2, bad3, solution1, solution2, solution3, microgoal}
-    //remove unwanted variables. Or just destructure from post[ten]
-    // const {gratitude_am, big_goal, task1, task2, task3, goal_id, day, ...pmPost} = postInfo.ten
     //set up the form
+    const {day,goal_id} = postInfo;
+    if(!goalId){goalId = goal_id}
     const [tenFormData, setTenFormData, resetTenFormData] = useFields(postInfo.ten);
-
+    const [checkbox, setCheckbox] = useState(postInfo.ten.accomplished)
+    const handleCheckbox=()=>{
+        setCheckbox(!checkbox)
+    }
+    console.log("tenForm edit things", tenFormData, "checkbox",checkbox)
     const handleTenSubmit = async (evt)=>{
         evt.preventDefault();
+        // const {goal_id, day, accomplished, win1, win2, win3, win_plan1, win_plan2, win_plan3, bad1, bad2, bad3, solution1, solution2, solution3, microgoal} = tenFormData; //formData may have additional fields from other posttypes from API
         if(edit){
             //get variables from passed in post 
-            const {goal_id, day, accomplished, win1, win2, win3, win_plan1, win_plan2, win_plan3, bad1, bad2, bad3, solution1, solution2, solution3, microgoal} = tenFormData; //formData may have additional fields from other posttypes from API
             //create postObj with desired variables
           
-            const postObj = {goal_id, day, accomplished, win1, win2, win3, win_plan1, win_plan2, win_plan3, bad1, bad2, bad3, solution1, solution2, solution3, microgoal};
-            console.log("TEN POST EDIT", postObj, "GOAL ID",+postInfo.goal_id, "PASSED IN?", goalId)
-            await ApiHelper.editPost(+postInfo.goal_id, day, "tendays",postObj);
+            // const postObj = {accomplished, win1, win2, win3, win_plan1, win_plan2, win_plan3, bad1, bad2, bad3, solution1, solution2, solution3, microgoal};
+            tenFormData.accomplished=checkbox;
+            console.log("TEN POST EDIT", tenFormData, "GOAL ID",+postInfo.goal_id, "PASSED IN?", goalId)
+            await ApiHelper.editPost(+postInfo.goal_id, day, "tendays",tenFormData);
           
-            // pass state up to parent so it updates..
-            // postInfo= {...postInfo, gratitude_pm, obstacle1,obstacle2,obstacle3, solution1, solution2, solution3, discipline, overall_day}
-            // console.log("New post info", postInfo);
-            //!!!!!!CHECK THIS!!
-            //use remaining postINfo and add new variables...  setPostInfo(existingPost =>{...existPost, post["ten"]:postObj})
-            // setPostInfo({...postInfo, gratitude_pm, obstacle1,obstacle2,obstacle3, solution1, solution2, solution3, discipline, overall_day});
-            // setPostInfo(postInfo =>{...postInfo, "ten":postObj})
             postInfo= {...postInfo,ten:tenFormData};
             console.log("TRY THIS:",postInfo)
             setPostInfo(postInfo)
             closeTenModal();
         } else {
             // console.log("TEN POST SUBMIT II", tenFormData, "GO_ID & D",goalId, day)
-            // await ApiHelper.createPost(goalId, day, "tendays",tenFormData);
+            //use checkbox for accomplished
+            tenFormData.accomplished=checkbox;
+            console.log("tenformdata.accomplished?", tenFormData)
+            await ApiHelper.createPost(goalId, day, "tendays",tenFormData);
             // //issue if we're sending null objects! iterate through and replace?
-            // postInfo= {...postInfo,ten:tenFormData};
+            postInfo= {...postInfo,ten:tenFormData};
             // // postInfo= {...postInfo,...tenFormData};
-            // console.log("New post info", postInfo);
+            console.log("New postInfo", postInfo);
             
             setPostInfo(postInfo);
         }
@@ -52,9 +49,17 @@ const EditTenPost = ({postInfo, edit, goalId, closeTenModal, setPostInfo})=>{ //
     return (<div>
         <h3>Ten Day Review</h3>
         <form onSubmit={handleTenSubmit} className="border-box">
-            <div className="input-label">
+            <div >
                 <p>Did I accomplish my microgoal? {tenFormData.accomplished}</p>
                 <div>
+                    <label for="yes">Yes
+                        <input type="checkbox" id="yes" name="accomplished" value={"accomplished"} 
+                            onChange = {handleCheckbox}
+                            checked={checkbox} />
+                    </label>
+                </div>
+                
+                {/* <div>
                     <label for="yes">Yes
                         <input type="radio" id="yes" name="accomplished" value={true} 
                             onChange = {setTenFormData}
@@ -67,7 +72,7 @@ const EditTenPost = ({postInfo, edit, goalId, closeTenModal, setPostInfo})=>{ //
                             onChange = {setTenFormData}
                             checked={tenFormData.accomplished === false} />                        
                     </label>
-                </div>
+                </div> */}
             </div>
             <div>
                 <div className="input-label">These things worked well over the last 10 days:</div>

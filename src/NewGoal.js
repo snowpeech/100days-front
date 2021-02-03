@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {useHistory} from "react-router-dom";
 import useFields from "./hooks/useFields"
-import ApiHelper from './ApiHelper';
+import ApiHelper from './helpers/ApiHelper';
 import UserContext from "./UserContext"
 const dayjs = require('dayjs');
 // import "./styles/Login.css" //placeholder
@@ -19,11 +19,9 @@ const NewGoal=()=>{
         user_def1:"",
         user_def2:"",
         user_def3:""})
-        //start day as today
+        //default start day as today
     const endDay = dayjs(formData.start_day).add(100, 'day').format('MMMM D, YYYY');
     
-    //100 days = 24*60*60*1000 milisec //convert 
-
     const handleCreateGoal = async (evt) =>{
         evt.preventDefault();
         const {goal, start_day, user_def1, user_def2, user_def3} = formData;
@@ -31,7 +29,7 @@ const NewGoal=()=>{
         console.log("Goal created! Token:", res._token)
         setToken(res._token);
         resetFormData();
-        history.push("/profile")//push to profile...
+        history.push("/profile");
     }
 
 

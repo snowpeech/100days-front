@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {useHistory} from "react-router-dom";
 import useFields from "./hooks/useFields"
-import ApiHelper from './ApiHelper';
+import ApiHelper from './helpers/ApiHelper';
 import UserContext from "./UserContext";
 // import "./styles/Login.css"
 
@@ -17,10 +17,14 @@ const Login=()=>{
         evt.preventDefault();
         console.log("handle login")
         const {email, password} = formData;
-        let _token= await ApiHelper.login(email,password);
-        setToken(_token);
-        resetFormData();
-        history.push("/")//push to profile...
+     try{
+         let _token= await ApiHelper.login(email,password);
+         setToken(_token);
+         resetFormData();
+         history.push("/")//push to profile...
+     }catch(e){
+         console.error(e);
+     }
     }
 
 

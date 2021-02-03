@@ -1,16 +1,11 @@
 import React, {useEffect, useState } from 'react';
 import UserContext from "./UserContext";
 import useLocalStorage from "./hooks/useLocalStorage";
-import ApiHelper from './ApiHelper'
+import ApiHelper from './helpers/ApiHelper';
 import { decode } from "jsonwebtoken";
 
 
 const UserProvider = ({children}) => {
-
-    //used  in Routes: {setToken, storedUser,setStoredUser}
-    //used in Navbar {storedUser}
-    // const [currentUser,setCurrentUser] = useLocalStorage('user',null);
-
     //storedUser is in Context
   const [storedUser, setStoredUser ]= useState(null) //changing storedUser to keep in here as state
     //token is stored in Local Storage

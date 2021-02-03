@@ -8,6 +8,8 @@ const Logout=()=>{
     useEffect(()=>{
         setStoredUser(null);
         setToken("");
+        localStorage.removeItem("_goalId");
+        localStorage.removeItem("_startDay");
     },[setStoredUser,setToken])
 
 //removes user from token. setLogout

@@ -1,11 +1,10 @@
 import React from 'react';
 import useFields from "./hooks/useFields";
-import ApiHelper from './ApiHelper';
-// import Button from 'react-bootstrap/Button'
+import ApiHelper from './helpers/ApiHelper';
 
 const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
+   //remove PM post values to start form 
     const {gratitude_pm, obstacle1,obstacle2,obstacle3, solution1, solution2, solution3, discipline, overall_day, user_def1, user_def2, user_def3, reflect, goal_id, day, ...amPost} = postInfo;
-   
     const [formData, setFormData, resetFormData] = useFields(amPost);
 
     console.log("all the edit things",postInfo, edit, goalId, day)
@@ -34,6 +33,7 @@ const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
     }
 
     return (<div>
+        <h3>AM</h3>
         <form onSubmit={handleAmSubmit} className="border-box">
             <div>
                 <label htmlFor="gratitude_am">Today, I am grateful for: </label>

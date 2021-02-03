@@ -3,9 +3,7 @@ import React,{useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import EditTenPost from './EditTenPost'
-import ApiHelper from './ApiHelper';
-
-import Form from 'react-bootstrap/Form'
+import ApiHelper from './helpers/ApiHelper';
 // import './styles/AmPost.css'
 
 const TenPost = ({post, setPostInfo})=>{
@@ -20,8 +18,7 @@ const TenPost = ({post, setPostInfo})=>{
     }
 
     const deletePost = async () => {
-        //check ApiHelper & 
-      let res = await ApiHelper.deletePost(post.goal_id, day,"tendays")
+      await ApiHelper.deletePost(post.goal_id, post.day,"tendays")
       //check on what is returned in Postman to see what should be kept.
       const {ten, ...keepVals} = post //user_def1, user_def2, user_def3,
       

@@ -1,8 +1,7 @@
 import React, {useContext} from "react";
 import {useHistory} from "react-router-dom";
-import useLocalStorage from './hooks/useLocalStorage'
 import useFields from "./hooks/useFields"
-import ApiHelper from './ApiHelper';
+import ApiHelper from './helpers/ApiHelper';
 import UserContext from "./UserContext"
 // import "./styles/Signup.css"
 
@@ -16,19 +15,17 @@ const Signup=()=>{
     
     const handleSubmit = async (evt)=>{
         evt.preventDefault();
-        if(formData.password == formData.password2 ){
+        if(formData.password === formData.password2 ){
             const {email, password, first_name, last_name} = formData
             let _token = await ApiHelper.signup(email, password, first_name,last_name);
             setToken(_token);
             setStoredUser({email,password,first_name,last_name})
-            // setStoredUser({...currentUser[0]})
             resetFormData();
             alert("Account Created!")
             history.push("/profile")
         } else {
             alert("Passwords must match")
         }
-        //history.push to go to profile page or something
     }
 
     return(<>

@@ -1,24 +1,26 @@
-import React,{useEffect,useState, useContext, Component} from 'react';
+import React,{useEffect,useState} from 'react';
 import {Link, useParams} from 'react-router-dom'
-import UserContext from "./UserContext"
 import AmPost from './AmPost'
 import PmPost from './PmPost'
 import EditAmPost from './EditAmPost'
 import EditPmPost from './EditPmPost'
-import ApiHelper from './ApiHelper';
+import ApiHelper from './helpers/ApiHelper';
 import './styles/Today.css'
 import NoGoal from './NoGoal';
 import EditTenPost from './EditTenPost';
 import TenPost from './TenPost';
+import BrokenLink from './BrokenLink'
 
 const dayjs = require('dayjs');
 
 const Today = ()=>{
     // const {goalId,start_day} = useContext(UserContext); //not sure why this works on refresh?? I'm not exporting the values...
     const goalId = localStorage.getItem("_goalId");
-    console.log("what is goal id?",goalId)
     const start_day = localStorage.getItem("_startDay")
     let { day } = useParams();
+
+    const regex = new RegExp('^[0-9]*$')
+    
     
     //change curday to startday + day from params using dayjs
     let curDay = dayjs(start_day).add(+day, 'day').format('MMMM D, YYYY') 
@@ -32,8 +34,6 @@ const Today = ()=>{
     const blankPm = {gratitude_pm:"",  obstacle1:"", obstacle2:"", obstacle3:"", solution1:"", solution2:"", solution3:"", discipline:"", overall_day:"", reflect:""}
     const blankTen = {accomplished:"", win1:"", win2:"", win3:"", win_plan1:"", win_plan2:"", win_plan3:"", bad1:"", bad2:"", bad3:"", solution1:"", solution2:"", solution3:"", microgoal:"" }
     
-    console.log("JUST CHECKING", typeof +day,"mod 10", +day%10 === 0 ,"daynot zero", +day !==0)
-
     useEffect(()=>{
         if(goalId){
             console.log("TODAY USEEFFECT", goalId)
@@ -46,7 +46,9 @@ const Today = ()=>{
             setPostInfo(res) //could be blank, need to check not goalid or day to get info
         }
     },[day, goalId])
-
+    if(!regex.test(day) || +day >100 || +day < 0){
+        return(<BrokenLink />)   
+       }
     if(!goalId){
         return(<NoGoal/>)
     } else{

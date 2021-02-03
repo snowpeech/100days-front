@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import UserContext from "./UserContext"
 import {useHistory} from "react-router-dom";
 import useFields from "./hooks/useFields"
-import ApiHelper from './ApiHelper';
+import ApiHelper from './helpers/ApiHelper';
 
 //passing info down instead of grabbing from Context
 const EditProfile=({id,first_name, last_name,location})=>{
