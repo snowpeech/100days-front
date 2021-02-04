@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 import useFields from "./hooks/useFields";
 import ApiHelper from './helpers/ApiHelper';
 import './styles/EditTenPost.css'
+import Button from 'react-bootstrap/Button'
 
 const EditTenPost = ({postInfo, edit, goalId, closeTenModal, setPostInfo})=>{ //not bringing in day/getting it passed down
     //set up the form
@@ -46,11 +47,11 @@ const EditTenPost = ({postInfo, edit, goalId, closeTenModal, setPostInfo})=>{ //
         resetTenFormData();
     }
 
-    return (<div>
+    return (<div  className="edit-post-form">
         <h3>Ten Day Review</h3>
         <form onSubmit={handleTenSubmit} className="border-box">
             <div >
-                <p>Did I accomplish my microgoal? {tenFormData.accomplished}</p>
+                Did I accomplish my microgoal? {tenFormData.accomplished}
                 <div>
                     <label for="yes">Yes
                         <input type="checkbox" id="yes" name="accomplished" value={"accomplished"} 
@@ -59,20 +60,7 @@ const EditTenPost = ({postInfo, edit, goalId, closeTenModal, setPostInfo})=>{ //
                     </label>
                 </div>
                 
-                {/* <div>
-                    <label for="yes">Yes
-                        <input type="radio" id="yes" name="accomplished" value={true} 
-                            onChange = {setTenFormData}
-                            checked={tenFormData.accomplished === true} />
-                    </label>
-                </div>
-                <div>
-                    <label for="no"> No
-                        <input type="radio" id="no" name="accomplished" value={false} 
-                            onChange = {setTenFormData}
-                            checked={tenFormData.accomplished === false} />                        
-                    </label>
-                </div> */}
+      
             </div>
             <div>
                 <div className="input-label">These things worked well over the last 10 days:</div>
@@ -185,110 +173,8 @@ const EditTenPost = ({postInfo, edit, goalId, closeTenModal, setPostInfo})=>{ //
                     required
                 />
             </div>
-            <button>Committed</button>
+            <Button>Committed</Button>
         </form>
-
-{/* BOoTS BElow! */}
-{/* <Form onSubmit={handleTenSubmit} className="border-box">
-            <Form.Group>
-
-                <Form.Label htmlFor="accomplished">I accomplished my last microgoal: </Form.Label>
-                <Form.Control 
-                    type="text"
-                    name = "accomplished"
-                    value ={tenFormData.accomplished}
-                    onChange = {setTenFormData}
-                    required
-                    />
-            
-            </Form.Group>
-            <div>
-                <div>These things worked well over the last 10 days:</div>
-                <input 
-                    type="text"
-                    name = "win1"
-                    placeholder="1."
-                    value ={tenFormData.win1}
-                    onChange = {setTenFormData}
-                    required
-                />
-                <input 
-                    type="text"
-                    name = "win2"
-                    placeholder="2."
-                    value ={tenFormData.win2}
-                    onChange = {setTenFormData}
-                />
-                <input 
-                    type="text"
-                    name = "win3"
-                    placeholder="3."
-                    value ={tenFormData.win3}
-                    onChange = {setTenFormData}
-                />
-            </div>
-            <div>I had a hard time with these three things:</div>
-            <div>
-                <input 
-                    type="text"
-                    name = "bad1"
-                    placeholder="1."
-                    value ={tenFormData.bad1}
-                    onChange = {setTenFormData}
-                    required
-                />
-                <input 
-                    type="text"
-                    name = "bad2"
-                    placeholder="2."
-                    value ={tenFormData.bad2}
-                    onChange = {setTenFormData}
-                />
-                <input 
-                    type="text"
-                    name = "bad3"
-                    placeholder="3."
-                    value ={tenFormData.bad3}
-                    onChange = {setTenFormData}
-                />
-            </div>
-            <div>To address those struggles, I plan to do these things:</div>
-            <div>
-                <input 
-                    type="text"
-                    name = "win_plan1"
-                    placeholder="1."
-                    value ={tenFormData.win_plan1}
-                    onChange = {setTenFormData}
-                    required
-                />
-                <input 
-                    type="text"
-                    name = "win_plan2"
-                    placeholder="2."
-                    value ={tenFormData.win_plan2}
-                    onChange = {setTenFormData}
-                />
-                <input 
-                    type="text"
-                    name = "win_plan3"
-                    placeholder="3."
-                    value ={tenFormData.win_plan3}
-                    onChange = {setTenFormData}
-                />    
-            </div>        
-            <div>
-                <label htmlFor="reflect">My next 10-day microgoal:</label>
-                <input 
-                    type="text"
-                    name = "microgoal"
-                    value ={tenFormData.microgoal}
-                    onChange = {setTenFormData}
-                    required
-                />
-            </div>
-            <button>Committed</button>
-        </Form> */}
 
     </div>)
 }

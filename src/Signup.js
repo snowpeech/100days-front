@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {useHistory} from "react-router-dom";
 import useFields from "./hooks/useFields"
-import ApiHelper from './helpers/ApiHelper';
+import ApiHelper from './helpers/ApiHelper';    
 import UserContext from "./UserContext"
 // import "./styles/Signup.css"
 

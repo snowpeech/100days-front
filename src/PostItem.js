@@ -1,41 +1,71 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import sun from './pics/sun.png'
+import moon from './pics/crescent-moon.png'
+
 const dayjs = require('dayjs');
 
 const PostItem = ({day}) =>{
     const startDay = localStorage.getItem("_startDay")
     let curDay = dayjs(startDay).add(+day.day, 'day').format('MMMM D') 
-    
-    console.log("grat day", typeof day.gratitude_am, day.gratitude_am)
 
-    let amInfo = <div>
-            <h5>AM </h5>
-            <div><b>Morning gratitude:</b> {day.gratitude_am}</div>
-            <div><b>Tasks:</b>
-            <ol>
-                {day.task1 && <li>{day.task1}</li>}
-                {day.task2 && <li>{day.task2}</li>}
-                {day.task3 && <li>{day.task3}</li>}
-            </ol> 
-
-            </div>            
-        </div>
+    let amInfo =<Card>
+    <Card.Body>
+       
+            <Container>
+                <Row>
+                    <Col xs={2}><h5>AM </h5>
+    <Card.Img src={sun} alt="sun icon" style={{ width: '2rem' }}/>
+    </Col>
+                    <Col>
+                        <b>Gratitude:</b> {day.gratitude_am}
+                        <div><b>Tasks:</b></div>
+                        <ol>
+                        {day.task1 && <li>{day.task1}</li>}
+                        {day.task2 && <li>{day.task2}</li>}
+                        {day.task3 && <li>{day.task3}</li>}
+                        </ol>
+                        </Col>
+                    </Row>
+                </Container>
+       
+        </Card.Body>
+    </Card>
     
-    let pmInfo = <div>
-            <h5>PM</h5>
-            <div><b>Discipline:</b> {day.discipline} / 10 </div>
-            <div><b>Overall Day:</b> {day.overall_day} / 10</div>
-            <div><b>Reflection:</b> {day.reflect}</div>
-        </div>
+    let pmInfo = <Card>
+    <Card.Body>
+        <Container>
+            <Row>
+                <Col xs={2}><h5>PM </h5>
+                <Card.Img src={moon} alt="night icon" style={{ width: '2rem' }}/>
+                </Col>
+                <Col>
+                    <div>
+                        <b>Reflection:</b> {day.reflect}
+                    </div>
+                    <div><b>Discipline:</b> {day.discipline} / 10 </div>
+                    <div><b>Overall Day:</b> {day.overall_day} / 10</div>
+                </Col>
+            </Row>
+        </Container>
+    </Card.Body>
+  </Card>
 
     // let amInfo = "am"
     // let pmInfo = "pm"
 
-    return(<>
+    return(<Container>
         <h4>Day {day.day} :: {curDay}</h4>    
-            {day.gratitude_am && amInfo }
+        <Row>
+           <Col xs={12} md={6}> {day.gratitude_am && amInfo }</Col>
 
-            {day.gratitude_pm && pmInfo}    
-    </>)
+           <Col xs={12} md={6}>{day.gratitude_pm && pmInfo}</Col>
+        </Row>
+    </Container>)
 }
 
 

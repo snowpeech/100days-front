@@ -1,6 +1,7 @@
 import React from 'react';
 import useFields from "./hooks/useFields";
 import ApiHelper from './helpers/ApiHelper';
+import Button from 'react-bootstrap/Button'
 
 const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
    //remove PM post values to start form 
@@ -32,7 +33,7 @@ const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
         resetFormData();
     }
 
-    return (<div>
+    return (<div className="edit-post-form">
         <h3>AM</h3>
         <form onSubmit={handleAmSubmit} className="border-box">
             <div>
@@ -84,7 +85,7 @@ const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
                     onChange = {setFormData}
                 />
             </div>
-            <button>Sieze this day!</button>
+            <Button>Sieze this day!</Button>
         </form>
     </div>)
 }

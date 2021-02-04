@@ -31,7 +31,7 @@ const TenPost = ({post, setPostInfo})=>{
     return (<div>   
         <h2>Ten Day Review</h2> 
         <Button variant="primary" onClick={handleShow}>
-        Edit Post <i className="fas fa-edit"></i>
+             <i className="fas fa-edit"></i>
         </Button>
         <Button  variant="danger" onClick = {deletePost}><i className="far fa-trash-alt"></i></Button>
 

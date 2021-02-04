@@ -4,6 +4,8 @@ import Modal from 'react-bootstrap/Modal';
 import useFields from "./hooks/useFields"
 import ApiHelper from './helpers/ApiHelper';
 import UserContext from "./UserContext";
+const dayjs = require('dayjs');
+
 
 const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
     const {setToken} = useContext(UserContext)
@@ -104,11 +106,11 @@ const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
 
     return(<>
     <div>
-        "{goalObj.goal}" started on {goalObj.start_day.slice(0,10)}
+    <i className="fas fa-star"></i> {goalObj.goal} : {dayjs(goalObj.start_day).format('MMMM D, YYYY')}
 
-        <Button onClick={handleClick} variant="secondary" >Edit Goal</Button>
+        <Button onClick={handleClick} variant="secondary" size="sm"><i className="fas fa-edit"></i></Button>
 
-        <Button onClick={()=>setShowDelete(true)} variant="danger" >Delete Goal</Button>
+        <Button onClick={()=>setShowDelete(true)} variant="danger" size="sm" ><i className="far fa-trash-alt"></i></Button>
 
         {showEdit ? editGoalForm : ""}
 

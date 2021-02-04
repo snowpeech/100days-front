@@ -23,12 +23,7 @@ const  Navbar=()=>{
             <NavLink exact to="/profile" className="navbar-brand">
                 Profile
             </NavLink>
-            
-            {/* Maybe change So goals info will be here?  */}
-            <NavLink exact to="/goals" className="navbar-brand">
-                Goals
-            </NavLink>
-
+        
             <NavLink exact to="/about" className="navbar-brand">
                 About
             </NavLink>

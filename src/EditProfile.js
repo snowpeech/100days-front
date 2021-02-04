@@ -3,6 +3,7 @@ import UserContext from "./UserContext"
 import {useHistory} from "react-router-dom";
 import useFields from "./hooks/useFields"
 import ApiHelper from './helpers/ApiHelper';
+import Button from 'react-bootstrap/Button'
 
 //passing info down instead of grabbing from Context
 const EditProfile=({id,first_name, last_name,location})=>{
@@ -23,8 +24,8 @@ const EditProfile=({id,first_name, last_name,location})=>{
     }
 
     return(<>
-    <h2>Edit Profile</h2>
-        <form onSubmit={handleSubmit} className="border-box">
+    <h2>Edit</h2>
+        <form onSubmit={handleSubmit} >
             
             <div>
                 <label htmlFor="first_name">First Name </label>
@@ -54,7 +55,7 @@ const EditProfile=({id,first_name, last_name,location})=>{
                     onChange = {setFormData}
                 />
             </div>
-            <button> Update Profile</button>
+            <Button> Update Profile</Button>
         </form>
 
     </>)

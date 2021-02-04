@@ -7,6 +7,7 @@ import EditProfile from "./EditProfile";
 import GoalItem from './GoalItem';
 import NoGoal from "./NoGoal";
 import Spinner from 'react-bootstrap/Spinner'
+import Button from 'react-bootstrap/Button'
 
 const Profile = () => {
     //display user info. Allow to edit.
@@ -37,9 +38,9 @@ const Profile = () => {
                 </Spinner></>)
     } else {
         const { id, email, first_name, last_name, location } = storedUser 
-        return(<>
-            <h1>Profile</h1>
-            <button onClick={toggleEdit}>Edit Profile</button>
+        return(<div className="border-box">
+            <h2>Profile</h2>
+            <Button onClick={toggleEdit}><i className="fas fa-user-edit"></i></Button>
             {showEdit ? <EditProfile id={id} first_name={first_name} last_name={last_name} location={location} /> :
             <div className="profile">
                 <div>
@@ -54,7 +55,7 @@ const Profile = () => {
             </div>
             }
 
-            <h2>Goals</h2>
+            <h2>Goal</h2>
             {!goalId ?  
                 <NoGoal/> :
 
@@ -64,7 +65,7 @@ const Profile = () => {
                             <div>Loading goal info...</div>}</div>}
 
                     
-        </>)
+        </div>)
     }
 }
 

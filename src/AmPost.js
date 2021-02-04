@@ -29,13 +29,13 @@ const AmPost = ({post, setPostInfo})=>{
         <h3>AM</h3> 
 
         <Button variant="primary" onClick={handleShow}>
-        Edit Post <i className="fas fa-edit"></i>
+           <i className="fas fa-edit"></i>
         </Button>
         <Button  variant="danger" onClick = {deletePost}><i className="far  fa-trash-alt"></i></Button>
 
         <Modal show={showEdit} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Post</Modal.Title>
+          <Modal.Title></Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <EditAmPost postInfo={post} edit={true} goalId ={goal_id} day={day} closeModal = {handleClose} setPostInfo={setPostInfo}/>

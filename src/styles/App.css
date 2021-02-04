@@ -40,3 +40,7 @@
 form input {
   border-style: none none solid none;
 }
+
+.edit-post-form{
+  padding-bottom: 4rem;
+}

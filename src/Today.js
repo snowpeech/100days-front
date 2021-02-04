@@ -21,7 +21,6 @@ const Today = ()=>{
 
     const regex = new RegExp('^[0-9]*$')
     
-    
     //change curday to startday + day from params using dayjs
     let curDay = dayjs(start_day).add(+day, 'day').format('MMMM D, YYYY') 
     
