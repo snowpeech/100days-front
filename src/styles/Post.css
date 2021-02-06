@@ -1,0 +1,36 @@
+button {
+    float:right;
+    margin: 15px;    
+}
+
+.delete-btn {
+    background-color: #fff;
+    color: #ff7211;
+    border-color: #ff7211;
+    margin: 10px;
+    border-radius: 4px;
+  }
+
+.delete-btn:active, .delete-btn:hover {
+    color: #fff;
+    background-color: #ff7211;
+    border-color: #ff7211;
+    margin: 10px;
+    border-radius: 4px;
+}
+
+.edit-btn {
+    background-color: #fff;
+    color: #42abae;
+    border-color: #42abae;
+    margin: 10px;
+    border-radius: 4px;
+  }
+
+.edit-btn:active, .edit-btn:hover {
+    color: #fff;
+    background-color: #0daeba;
+    border-color: #42abae;
+    margin: 10px;
+    border-radius: 4px;
+}

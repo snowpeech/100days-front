@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import useFields from "./hooks/useFields"
 import ApiHelper from './helpers/ApiHelper';
 import UserContext from "./UserContext";
-// import "./styles/Login.css"
+import { decode } from "jsonwebtoken";
 
 const Login=()=>{
     const history = useHistory();
@@ -20,6 +20,12 @@ const Login=()=>{
      try{
          let _token= await ApiHelper.login(email,password);
          setToken(_token);
+
+         let decodedToken = decode(_token)
+         let { goals,start_days} = decodedToken;
+         localStorage.setItem('_goalId',goals[0])
+         localStorage.setItem('_startDay',start_days[0])
+         //set up goals and start day in localStorage
          resetFormData();
          history.push("/")//push to profile...
      }catch(e){
@@ -51,7 +57,7 @@ const Login=()=>{
                     onChange={handleChange} 
                     required/> 
                 </div>
-                <button>Log In</button>
+                <button className="login-btn">Log In</button>
             </form>
                 
         </>)

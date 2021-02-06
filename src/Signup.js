@@ -80,7 +80,7 @@ const Signup=()=>{
                     onChange = {setFormData}
                 />
             </div>
-            <button> Sign Up!</button>
+            <button className="login-btn"> Sign Up!</button>
         </form>
 
     </>)

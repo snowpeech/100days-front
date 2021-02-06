@@ -8,6 +8,7 @@ import Today from "./Today";
 import About from './About'
 import ProtectedRoute from './ProtectedRoute'
 import Dashboard from "./Dashboard";
+import TenSummary from './TenSummary'
 
 const Routes =()=>{
 /* Home page is a simple welcome page
@@ -43,6 +44,11 @@ return(<Switch>
     <Route exact path="/about">
         <About />
     </Route>
+
+    <Route exact path="/ten/:day">
+        <TenSummary />
+    </Route>
+
 
     <Route  exact path="/home">
         {storedUser ? <Redirect to="/profile" /> : <Home/>}

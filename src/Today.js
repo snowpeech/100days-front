@@ -1,5 +1,8 @@
 import React,{useEffect,useState} from 'react';
 import {Link, useParams} from 'react-router-dom'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import AmPost from './AmPost'
 import PmPost from './PmPost'
 import EditAmPost from './EditAmPost'
@@ -7,14 +10,11 @@ import EditPmPost from './EditPmPost'
 import ApiHelper from './helpers/ApiHelper';
 import './styles/Today.css'
 import NoGoal from './NoGoal';
-import EditTenPost from './EditTenPost';
-import TenPost from './TenPost';
 import BrokenLink from './BrokenLink'
 
 const dayjs = require('dayjs');
 
 const Today = ()=>{
-    // const {goalId,start_day} = useContext(UserContext); //not sure why this works on refresh?? I'm not exporting the values...
     const goalId = localStorage.getItem("_goalId");
     const start_day = localStorage.getItem("_startDay")
     let { day } = useParams();
@@ -31,7 +31,7 @@ const Today = ()=>{
 
     const blankAm = {gratitude_am:"", big_goal:"", task1:"", task2:"", task3:""}
     const blankPm = {gratitude_pm:"",  obstacle1:"", obstacle2:"", obstacle3:"", solution1:"", solution2:"", solution3:"", discipline:"", overall_day:"", reflect:""}
-    const blankTen = {accomplished:"", win1:"", win2:"", win3:"", win_plan1:"", win_plan2:"", win_plan3:"", bad1:"", bad2:"", bad3:"", solution1:"", solution2:"", solution3:"", microgoal:"" }
+    // const blankTen = {accomplished:"", win1:"", win2:"", win3:"", win_plan1:"", win_plan2:"", win_plan3:"", bad1:"", bad2:"", bad3:"", solution1:"", solution2:"", solution3:"", microgoal:"" }
     
     useEffect(()=>{
         if(goalId){
@@ -45,6 +45,7 @@ const Today = ()=>{
             setPostInfo(res) //could be blank, need to check not goalid or day to get info
         }
     },[day, goalId])
+    
     if(!regex.test(day) || +day >100 || +day < 0){
         return(<BrokenLink />)   
        }
@@ -53,21 +54,28 @@ const Today = ()=>{
     } else{
         return(<>
         <h2>{curDay}</h2>
-        <h4>Today is a good day</h4>
+        <h4 className="quiet">Today is a good day</h4>
         <div>
-            {day >= 1 ? <Link to={`/journal/${day-1}`} ><i className="fas fa-chevron-left"></i>Prev Day  </Link> : <div className="inactive">You're at the first day</div>}
-            <span>| Day {day} |</span>
-            {day < 100 ? <Link to={`/journal/${+day+1}`} > Next Day <i className="fas fa-chevron-right"></i> </Link> : <div className="inactive">You're at the last day!</div>}
+            {day >= 1 ? <Link to={`/journal/${day-1}`} className="day-nav"><i className="fas fa-chevron-left"></i> Prev Day  </Link> : <div className="inactive">You're at the first day</div>}
+            <span className="day-nav">| Day {day} |</span>
+            {day < 100 ? <Link to={`/journal/${+day+1}`} className="day-nav"> Next Day <i className="fas fa-chevron-right"></i> </Link> : <div className="inactive">You're at the last day!</div>}
         </div>
-        
+        <Container>
+            <Row>
+                <Col xs={12} md={6}>
         { postInfo["gratitude_am"]  ? <AmPost post={postInfo} setPostInfo={setPostInfo}/> : <EditAmPost edit={false} postInfo={{...postInfo, ...blankAm}} goalId ={goalId}  setPostInfo={setPostInfo}/> }
-        
+                </Col>
+                <Col xs={12} md={6}>
         { postInfo["gratitude_pm"]  ? <PmPost post={postInfo} setPostInfo={setPostInfo}/> : <EditPmPost edit={false} postInfo={{...postInfo, ...blankPm}} goalId ={goalId} setPostInfo={setPostInfo}/> }
-        
+                </Col>
+            </Row>
+            {/* <Row><Col>
+
         { (+day%10 === 0 && +day !==0) && postInfo["ten"] ? <TenPost post={postInfo} setPostInfo={setPostInfo}/> : ""}
         
         {(+day%10 === 0 && +day !==0) && !postInfo["ten"] ? <EditTenPost edit={false} postInfo={{...postInfo, ten:blankTen}} goalId ={goalId} setPostInfo={setPostInfo}/> :"" }
-        
+            </Col></Row> */}
+        </Container>
         </>)
     }
 }

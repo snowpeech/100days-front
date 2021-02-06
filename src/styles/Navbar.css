@@ -1,8 +1,23 @@
 .Navbar {
     margin: 1rem;
+    background-color: #f0f0f3;
+    
   }
   
-  .Navbar a {
-    margin: 1rem;
-  }
-  
+.Navbar a {
+  margin: 1rem 1.5rem;
+  color:#55bcc0;
+  font-size: 1em;
+  font-weight: 600;
+  /* color: #ff7211; */
+
+}
+
+.Navbar a.active {
+  color: #08979e;
+  /* text-decoration: underline; */
+  font-size: larger;
+  border-bottom: 1px solid #08979e;
+  padding:5px 7px;
+  font-size: 1.15em;
+}

@@ -1,16 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import ApiHelper from './helpers/ApiHelper';
-import NoGoal from './NoGoal';
-import Profile from './Profile';
-import './styles/Dashboard.css';
-import mergeDay from './helpers/mergeDay'
-import PostItem from './PostItem';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import ProgressBar from 'react-bootstrap/ProgressBar'
+
+import ApiHelper from './helpers/ApiHelper';
+import mergeDay from './helpers/mergeDay'
+import NoGoal from './NoGoal';
+import Profile from './Profile';
+import PostItem from './PostItem';
+import './styles/Dashboard.css';
+
+const dayjs = require('dayjs');
 
 const Dashboard = ()=>{
-    const goalId = localStorage.getItem("_goalId")
+    const goalId = localStorage.getItem("_goalId");
+    const startDay = localStorage.getItem("_startDay");
+    let dayDiff;
+        if(startDay){
+            dayDiff =  dayjs().diff(startDay,'day');
+        }    
     const [recentPosts, setRecentPosts] = useState([]);
     
     useEffect(()=>{
@@ -25,11 +34,12 @@ const Dashboard = ()=>{
     },[goalId])
 
 return(<Container>
+               <ProgressBar variant="info" now={dayDiff} label={`${dayDiff}/100 days`}/>
     <Row>
-        <Col xs={12} m={3}>
+        <Col xs={12} md={3}>
             <Profile/>    
         </Col>
-        <Col xs={12} m={9}>
+        <Col xs={12} md={9}>
             <h2>Recent Posts</h2>
             {!goalId ? <NoGoal /> :""}
             {recentPosts ? 

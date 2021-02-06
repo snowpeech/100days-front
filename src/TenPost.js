@@ -1,16 +1,13 @@
 import React,{useState} from 'react';
-
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import EditTenPost from './EditTenPost'
 import ApiHelper from './helpers/ApiHelper';
-// import './styles/AmPost.css'
-
+import './styles/Post.css'
+                                                      
 const TenPost = ({post, setPostInfo})=>{
-    console.log("INCOMING TEN FORM",post, "TEN", post.ten)
     // goal_id,day,progress, win1, win2, win3, win_plan1, bad1, bad2, bad3, solution1,microgoal
     //progress = "Did I accomplish my last microgoal?" //maybe can pull up last micro-goal
-    const {accomplished, win1, win2, win3, win_plan1, win_plan2, win_plan3, bad1, bad2, bad3, solution1, solution2, solution3, microgoal, goal_id, day} = post.ten //user_def1, user_def2, user_def3,
+    const {accomplished, win1, win2, win3, win_plan1, win_plan2, win_plan3, bad1, bad2, bad3, solution1, solution2, solution3, microgoal, goal_id, day} = post //user_def1, user_def2, user_def3,
     
     const [showEdit, setShowEdit] = useState(false);
     const handleClose = () => {
@@ -26,14 +23,12 @@ const TenPost = ({post, setPostInfo})=>{
     }
     const handleShow = () => setShowEdit(true);
 
-    // useEffect for PM Metrics :) implement later...
-
     return (<div>   
         <h2>Ten Day Review</h2> 
-        <Button variant="primary" onClick={handleShow}>
-             <i className="fas fa-edit"></i>
-        </Button>
-        <Button  variant="danger" onClick = {deletePost}><i className="far fa-trash-alt"></i></Button>
+        <button className='edit-btn' onClick={handleShow}>
+           <i className="fas fa-edit"></i>
+        </button>
+        <button  className = "delete-btn" onClick = {deletePost}><i className="far fa-trash-alt"></i></button>
 
         <Modal show={showEdit} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
@@ -46,7 +41,7 @@ const TenPost = ({post, setPostInfo})=>{
 
       {/* // goal_id,day,progress, win1, win2, win3, win_plan1, bad1, bad2, bad3, solution1,microgoal */}
         <div className="border-box">
-            <h5>I {accomplished ? "did" : "did not"} accomplish my last microgoal </h5>
+            <h5>I <u>{accomplished ? "did" : "did not"}</u> accomplish my last microgoal </h5>
             <h5>These things worked well over the last 10 days: </h5>
             <ol>
                 {win1 && <li>{win1}</li>}

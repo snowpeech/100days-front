@@ -1,8 +1,8 @@
 import React,{useState} from 'react';
 import useFields from "./hooks/useFields";
-import ApiHelper from './helpers/ApiHelper';
-import './styles/EditTenPost.css'
+import ApiHelper from './helpers/ApiHelper';    
 import Button from 'react-bootstrap/Button'
+import './styles/EditPost.css';
 
 const EditTenPost = ({postInfo, edit, goalId, closeTenModal, setPostInfo})=>{ //not bringing in day/getting it passed down
     //set up the form
@@ -20,8 +20,6 @@ const EditTenPost = ({postInfo, edit, goalId, closeTenModal, setPostInfo})=>{ //
         if(edit){
             //get variables from passed in post 
             //create postObj with desired variables
-          
-            // const postObj = {accomplished, win1, win2, win3, win_plan1, win_plan2, win_plan3, bad1, bad2, bad3, solution1, solution2, solution3, microgoal};
             tenFormData.accomplished=checkbox;
             console.log("TEN POST EDIT", tenFormData, "GOAL ID",+postInfo.goal_id, "PASSED IN?", goalId)
             await ApiHelper.editPost(+postInfo.goal_id, day, "tendays",tenFormData);

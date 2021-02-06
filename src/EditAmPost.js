@@ -1,7 +1,7 @@
 import React from 'react';
 import useFields from "./hooks/useFields";
 import ApiHelper from './helpers/ApiHelper';
-import Button from 'react-bootstrap/Button'
+import './styles/EditPost.css'
 
 const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
    //remove PM post values to start form 
@@ -14,19 +14,14 @@ const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
         if(edit){
             const {gratitude_am, big_goal, task1, task2, task3} = formData; //formData may have additional fields from other posttypes from API
             const postObj = {gratitude_am, big_goal, task1, task2, task3}; //removing goal_id and day from postObj?
-            console.log("AM POST EDIT", postObj, "GOAL ID",+postInfo.goal_id, "PASSED IN?", goalId)
-            // console.log("DAY DIFF", dayDiff, "DAY", day)
+            
             await ApiHelper.editPost(+postInfo.goal_id, day, "am", postObj);
-            // pass state up to parent so it updates..
+        
             setPostInfo({...postInfo, goalId, day, gratitude_am, big_goal, task1, task2, task3});
-
             closeModal();
         } else {
-            console.log("AM POST SUBMIT", formData, "GO_ID & D",goalId, day)
             await ApiHelper.createPost(goalId, day, "am",formData);
             postInfo= {...postInfo,...formData};
-            console.log("New post info", postInfo);
-            // console.log("DAY DIFF", dayDiff, "DAY", day)
             setPostInfo(postInfo)
         }
             
@@ -35,8 +30,8 @@ const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
 
     return (<div className="edit-post-form">
         <h3>AM</h3>
-        <form onSubmit={handleAmSubmit} className="border-box">
-            <div>
+        <form onSubmit={handleAmSubmit} className="border-boxx">
+            <div className="input-label">
                 <label htmlFor="gratitude_am">Today, I am grateful for: </label>
                 <input 
                     type="text"
@@ -46,7 +41,7 @@ const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
                     required
                 />
             </div>
-            <div>
+            <div className="input-label">
                 <label htmlFor="big_goal">My 100-day goal is: </label>
                 <input 
                     type="text"
@@ -56,7 +51,7 @@ const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
                     required
                 />
             </div>
-            <div>By completing these tasks, I will be closer to my goal:</div>
+            <div className="input-label">By completing these tasks, I will be closer to my goal:</div>
             <div>
                 <input 
                     type="text"
@@ -85,7 +80,7 @@ const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
                     onChange = {setFormData}
                 />
             </div>
-            <Button>Sieze this day!</Button>
+            <button className="submit-btn">  <i className="fas fa-check"></i> </button>
         </form>
     </div>)
 }

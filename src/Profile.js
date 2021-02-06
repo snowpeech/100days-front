@@ -38,9 +38,9 @@ const Profile = () => {
                 </Spinner></>)
     } else {
         const { id, email, first_name, last_name, location } = storedUser 
-        return(<div className="border-box">
+        return(<div className="border-boxx r-border">
             <h2>Profile</h2>
-            <Button onClick={toggleEdit}><i className="fas fa-user-edit"></i></Button>
+            <Button onClick={toggleEdit} size="sm"><i className="fas fa-user-edit"></i></Button>
             {showEdit ? <EditProfile id={id} first_name={first_name} last_name={last_name} location={location} /> :
             <div className="profile">
                 <div>

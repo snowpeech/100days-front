@@ -35,15 +35,17 @@ const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
     const [formData, setFormData] = useFields(INITIAL_STATE)
     const handleSubmit = async (evt) => {
         evt.preventDefault();
+        console.log("HANDLE SUBMIT", formData)
         let res = await ApiHelper.updateGoal(goalObj.goal_id, formData);
-        if(res){
-            
+        console.log("UPDATE GOAL RES", res)
+        if(res){            
             let newUserGoals = userGoals.map(g => g.goal_id === goalObj.goal_id ? {...formData, goal_id:goalObj.goal_id} : g)
             setUserGoals(newUserGoals);
+            //update local storage with new start day!! this might need to get parsed   
+            localStorage.setItem('_startDay', formData.start_day)
             setShowEdit(!showEdit);
         }
-    }
-    
+    }    
 
     const deleteGoal =async ()=>{
         let res = await ApiHelper.deleteGoal(goal_id)
@@ -122,7 +124,7 @@ const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
         <Modal.Body>
             Once you've deleted a goal, all the associated posts with it are gone. Forever.
             <Button onClick={deleteGoal} variant="danger">Delete Goal</Button>
-            <Button>Keep Goal</Button>
+            <Button onClick={handleModalClose}>Keep Goal</Button>
         </Modal.Body>
       </Modal>
 

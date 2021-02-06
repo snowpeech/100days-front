@@ -90,6 +90,12 @@ class ApiHelper {
       return res;
     }
 
+    static async getTenDay(goalid,day){
+      let res = await this.request(`/${goalid}/${day}/tendays`)
+      console.log("TENDAY APIHELPER RES", res)
+      return res;
+    }
+
     static async getMetrics(goalId,day){
       //gets PM metrics for past 10 days from the date passed in (inclusive)
       let res = await this.request(`posts/${goalId}/${day}/metrics`)
@@ -104,8 +110,7 @@ class ApiHelper {
       return res;
     }
     
-    static async createPost(goalId, day,postType, postObj){
-    
+    static async createPost(goalId, day,postType, postObj){    
       let res = await this.request(`posts/${goalId}/${day}/${postType}`,postObj, "post")
       console.log(res)
       return res;
@@ -116,7 +121,7 @@ class ApiHelper {
       console.log(res)
       return res;
     }
-////////////
+    
     static async deletePost(goalId,day,postType){
       let res = await this.deleteRequest(`posts/${goalId}/${day}/${postType}`)
       console.log("DELTE POST RES", res)

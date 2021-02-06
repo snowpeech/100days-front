@@ -1,6 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -59,7 +59,8 @@ const PostItem = ({day}) =>{
     // let pmInfo = "pm"
 
     return(<Container>
-        <h4>Day {day.day} :: {curDay}</h4>    
+        <Link to={`journal/${day.day}`}> <h4>Day {day.day} :: {curDay}</h4>  </Link>
+           
         <Row>
            <Col xs={12} md={6}> {day.gratitude_am && amInfo }</Col>
 

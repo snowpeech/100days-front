@@ -1,10 +1,8 @@
 import React,{useState} from 'react';
-
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import './styles/AmPost.css'
 import EditAmPost from './EditAmPost'
 import ApiHelper from './helpers/ApiHelper';
+import './styles/Post.css'
 
 const AmPost = ({post, setPostInfo})=>{
     
@@ -27,11 +25,10 @@ const AmPost = ({post, setPostInfo})=>{
 
     return (<div>   
         <h3>AM</h3> 
-
-        <Button variant="primary" onClick={handleShow}>
+        <button className='edit-btn' onClick={handleShow}>
            <i className="fas fa-edit"></i>
-        </Button>
-        <Button  variant="danger" onClick = {deletePost}><i className="far  fa-trash-alt"></i></Button>
+        </button>
+        <button  className = "delete-btn" onClick = {deletePost}><i className="far fa-trash-alt"></i></button>
 
         <Modal show={showEdit} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
@@ -43,7 +40,7 @@ const AmPost = ({post, setPostInfo})=>{
       </Modal>
 
 
-        <div className="border-box">
+        <div className="border-boxx">
 
         <h5>Today, I am grateful for: </h5>
         <p>{gratitude_am}</p>

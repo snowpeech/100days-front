@@ -1,8 +1,9 @@
 import React,{useState} from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import EditPmPost from './EditPmPost'
 import ApiHelper from './helpers/ApiHelper';
+import './styles/Post.css'
+
 
 const PmPost = ({post, setPostInfo})=>{
 
@@ -24,10 +25,10 @@ const PmPost = ({post, setPostInfo})=>{
 
     return (<div>   
         <h2>PM</h2> 
-        <Button variant="primary" onClick={handleShow}>
-            <i className="fas fa-edit"></i>
-        </Button>
-        <Button  variant="danger" onClick = {deletePost}><i className="far fa-trash-alt"></i></Button>
+        <button className='edit-btn' onClick={handleShow}>
+           <i className="fas fa-edit"></i>
+        </button>
+        <button  className = "delete-btn" onClick = {deletePost}><i className="far fa-trash-alt"></i></button>
 
         <Modal show={showEdit} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
@@ -39,7 +40,7 @@ const PmPost = ({post, setPostInfo})=>{
       </Modal>
 
 
-        <div className="border-box">
+        <div className="border-boxx">
             <h5>I am glad this happened: </h5>
             <p>{gratitude_pm}</p>
             <h5>I had these struggles: </h5>

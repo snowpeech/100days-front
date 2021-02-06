@@ -2,7 +2,7 @@ import React,{useContext} from "react"; //import {useContext} later
 import { NavLink} from 'react-router-dom';
 import "./styles/Navbar.css"
 import UserContext from "./UserContext"
-var dayjs = require('dayjs');
+const dayjs = require('dayjs');
 
 const  Navbar=()=>{
     // //before auth, default loggedIn = true for dev
@@ -32,9 +32,14 @@ const  Navbar=()=>{
                 Today
             </NavLink>
 
+            <NavLink exact to={`/ten/${dayDiff}`} className="navbar-brand">
+                Ten Day Review
+            </NavLink>
+
             <NavLink exact to="/logout" className="navbar-brand">
                 Log out
             </NavLink>        
+ 
         </div> )
     } else {
         return (

@@ -1,10 +1,20 @@
+/* light teal #42abae
+dk teal #0d9ba3
+orange fe8b10 
+dk orange ff7211
+lt orange fbbc14
+black  #041e2b
+light grey edeaeb
+*/
+
+
 .App {
   text-align: center;
+  color:#041e2b;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1,h2,h3,h4,h5{
+  color:#041e2b;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -37,10 +47,60 @@
   }
 }
 
+body{
+  color:rgb(30,47,57);
+}
+
 form input {
   border-style: none none solid none;
 }
 
-.edit-post-form{
-  padding-bottom: 4rem;
+button {
+  display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    border-radius: 4px;  
+    margin: .4rem .15rem;
+}
+
+
+.btn{
+  padding: .275rem .75rem;
+  margin: .4rem .15rem;
+  border-radius: 4px;
+}
+
+.login-btn:active, .login-btn:hover {
+  background-color: #85dfe4;
+  color:#fff;
+  border-color: #fff;
+  margin: 10px;
+  border-radius: 4px;
+}
+
+.login-btn {
+  color: #fff;
+  background-color: #0d9ba3;
+  border-color: #0d9ba3;
+  margin: 10px;
+  border-radius: 4px;
+}
+
+.r-border {
+  border-right: 1px solid gainsboro;
+}
+
+.graph-container{
+  height:280px;
 }
