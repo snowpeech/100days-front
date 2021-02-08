@@ -35,9 +35,8 @@ const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
     const [formData, setFormData] = useFields(INITIAL_STATE)
     const handleSubmit = async (evt) => {
         evt.preventDefault();
-        console.log("HANDLE SUBMIT", formData)
         let res = await ApiHelper.updateGoal(goalObj.goal_id, formData);
-        console.log("UPDATE GOAL RES", res)
+        
         if(res){            
             let newUserGoals = userGoals.map(g => g.goal_id === goalObj.goal_id ? {...formData, goal_id:goalObj.goal_id} : g)
             setUserGoals(newUserGoals);
@@ -50,7 +49,7 @@ const GoalItem = ({goalObj, setUserGoals, userGoals}) =>{
     const deleteGoal =async ()=>{
         let res = await ApiHelper.deleteGoal(goal_id)
         let newUserGoals = userGoals.filter(g => g.goal_id !== goalObj.goal_id )
-        console.log("NEW USERGOALS after delete", newUserGoals)
+        
         setUserGoals(newUserGoals);
         setToken(res._token);
         localStorage.removeItem('_goalId');

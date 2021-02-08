@@ -34,14 +34,15 @@ const Dashboard = ()=>{
     },[goalId])
 
 return(<Container>
-            {goalId &&  <ProgressBar className= "mb-3" variant="info" now={dayDiff} label={`${dayDiff}/100 days`}/>}
+            {isNaN(dayDiff) ? "" : <ProgressBar className= "mb-3" variant="info" now={dayDiff} label={`${dayDiff}/100 days`}/> }
     <Row>
         <Col xs={12} md={3} className='r-border'>
             <Profile/>    
         </Col>
         <Col xs={12} md={9}>
             <h2>Recent Posts</h2>
-            {!goalId ? <NoGoal /> :""}
+            
+            {isNaN(dayDiff) &&<NoGoal /> }
             {recentPosts ? 
                 recentPosts.map(day=><PostItem day={day} key={day.day}/>) 
                 

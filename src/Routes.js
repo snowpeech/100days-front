@@ -52,6 +52,10 @@ return(<Switch>
     <Route exact path="/ten/undefined">
         {storedUser ? <div><Link to="/goals">Create a new goal</Link> before journaling</div> : <Redirect to="/"/> }
     </Route>
+
+    <Route exact path="/ten/NaN">
+        {storedUser ? <div><Link to="/goals">Create a new goal</Link> before journaling</div> : <Redirect to="/"/> }
+    </Route>
     
     <Route exact path="/ten/:day">
         {storedUser ? <TenSummary/> : <Redirect to="/"/> } 

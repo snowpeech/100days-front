@@ -14,6 +14,7 @@ const Profile = () => {
     //also list goals. And allow to edit
     const {storedUser} = useContext(UserContext); //takes a second to come back from a page refresh...
     const goalId = localStorage.getItem("_goalId")
+    console.log("PROFILE GOID",goalId)
 
     const [userGoals, setUserGoals] = useState("");
 

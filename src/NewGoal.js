@@ -15,17 +15,13 @@ const NewGoal=()=>{
 
     const [formData,handleChange, resetFormData] = useFields(
         {goal:"", 
-        start_day:today,
-        user_def1:"",
-        user_def2:"",
-        user_def3:""})
-        //default start day as today
+        start_day:today})
     const endDay = dayjs(formData.start_day).add(100, 'day').format('MMMM D, YYYY');
     
     const handleCreateGoal = async (evt) =>{
         evt.preventDefault();
-        const {goal, start_day, user_def1, user_def2, user_def3} = formData;
-        let res = await ApiHelper.createGoal(goal, start_day, user_def1, user_def2, user_def3);
+        const {goal, start_day} = formData;
+        let res = await ApiHelper.createGoal(goal, start_day);
         console.log("Goal created! Token:", res._token)
         setToken(res._token);
         resetFormData();
@@ -63,41 +59,7 @@ const NewGoal=()=>{
                 required/> 
             </div>
             <p>Note: 100 days from that start date is: {endDay}</p>
-        <h4>Optional: User Defined Metric</h4>
-        <p>For each night of your journey, you'll be asked to rate how __ and __ you were. If you want to track your own 
-            unique values, this is where you can define that. If you can't think of something right now, 
-            you can always come back to it. Keep in mind that order *does* matter.</p>
-            <p>If you're tracking something that isn't on an obvious scale, 
-                it might be helpful to add the units you're measuring
-                (e.g. Sleep (hrs))
-            </p>
-            <div>
-                <label htmlFor="user_def1">Unique metric (1)</label>
-                <input 
-                id='user_def1' 
-                type='text'
-                name='user_def1'
-                value={formData.user_def1}
-                onChange={handleChange} /> 
-            </div>
-            <div>
-                <label htmlFor="user_def2">Unique metric (2)</label>
-                <input 
-                id='user_def2' 
-                type='text'
-                name='user_def2'
-                value={formData.user_def2}
-                onChange={handleChange} /> 
-            </div>
-            <div>
-                <label htmlFor="user_def3">Unique metric (3)</label>
-                <input 
-                id='user_def3' 
-                type='text'
-                name='user_def3'
-                value={formData.user_def3}
-                onChange={handleChange} /> 
-            </div>     
+       
             <button>Create Goal!</button>
         </form>
                 
