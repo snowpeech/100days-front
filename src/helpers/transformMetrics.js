@@ -9,8 +9,6 @@ function transformMetrics(metrics, startDay=0) {
                 "data":[]
             }; 
     let i = 0;
-    // let dateEnd = date+9;
-    console.log("TraNSFORMMETRICS incoming", metrics)
 
     if (startDay >  metrics[i].day) {return "ERROR. INVALID DATA & RANGE"}
 
@@ -43,41 +41,3 @@ function transformMetrics(metrics, startDay=0) {
 }
 
 export default transformMetrics;
-//     while(date < dateEnd){
-//         while(i < metrics.length){
-//             if(parseInt(metrics[i].day) === date){
-//                 console.log("equal :: day & i",metrics[i].day, date )
-                // disc.data.push({"x":date, "y":metrics[i].discipline})
-                // overall.data.push({"x":date, "y":metrics[i].overall_day});
-//                 i++;
-//                 date++;
-//             } else if(parseInt(metrics[i].day)  < date){
-                
-//                 console.log("m[i] < day",metrics[i].day, date )
-//                 return 
-//             } else {
-
-//                 //it can get stuck in here because there is no i++
-//                 //this would happen if met[i] < day
-//                 //this would happen if met[i] > day
-//                 console.log("not equal: day & i",parseInt(metrics[i].day),typeof  parseInt(metrics[i].day),typeof date, date )
-                // disc.data.push({"x":date, "y":null})
-                // overall.data.push({"x":date, "y":null});
-                // date++;
-//             }
-//             //reached end of 
-            
-//             +
-
-//             }
-//         console.log("finishing up while loop??", date, dateEnd)
-//         disc.data.push({"x":date, "y":null})
-//         overall.data.push({"x":date, "y":null});
-//         }
-
-//     data.push(disc,overall)
-//     console.log(data)
-
-//     return data;
-// }
-

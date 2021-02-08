@@ -20,10 +20,12 @@ class ApiHelper {
   
       catch(err) {
         console.error("API Error:", err.response); 
+        // console.log("WHTWOEIRJL:WEIWJH", err.response.data.error.message)
         let message = err.response.data.error.message;
-        // alert(message[0])
-        // console.log("apihelper!", err.response.data.error.message)
-        // alert(err.response.data.error.message)
+        if(err.response.status === 400){
+          alert(err.response.data.error.message)  
+        }
+        
         throw Array.isArray(message) ? message : [message];
       }
     }
@@ -39,12 +41,8 @@ class ApiHelper {
         return (await axios({
           method: "delete",
           url: `http://localhost:3001/${endpoint}`,
-          "params": paramsOrData})).data;// tried removing this because we're not using a query string..
-      }
-          // let res = axios.delete(`http://localhost:3001/${endpoint}`)
-      
-  
-      catch(err) {
+          "params": paramsOrData})).data;
+      } catch(err) {
         console.error("API Error:", err.response);
         let message = err.response.data.message;
         throw Array.isArray(message) ? message : [message];
@@ -82,16 +80,22 @@ class ApiHelper {
       
       return res.user;
     }
+
+    static async deleteUser(user_id){
+      let res = await this.deleteRequest(`users/${user_id}`)
+      return res;
+    }
         
     /*Day-post actions */
     static async getDayPosts(goalId,day){
+      //gets posts related to goalid, day, good for Today
       let res = await this.request(`posts/${goalId}/${day}`)
       console.log("API HELPER RES", res)
       return res;
     }
 
     static async getTenDay(goalid,day){
-      let res = await this.request(`/${goalid}/${day}/tendays`)
+      let res = await this.request(`posts/${goalid}/${day}/tendays`)
       console.log("TENDAY APIHELPER RES", res)
       return res;
     }
@@ -153,20 +157,3 @@ class ApiHelper {
   }
     
     export default ApiHelper;
-
-    ///////////////////////// I tried...
-    // static async updateGoal(goal_id,goal, start_day, user_def1, user_def2, user_def3){
-    //   try {
-    //     const token = window.localStorage.getItem('_token');
-    //     // let data = {goal_id,goal, start_day, user_def1, user_def2, user_def3,_token:window.localStorage.getItem('_token')}
-    //     const res = await axios.patch(`${baseURL}goals/${goal_id}`, {goal_id,goal, start_day, user_def1, user_def2, user_def3,_token:token})
-    //     return res.data;
-
-    //   } catch (err) {
-    //     console.error("API Error:", err.response);
-    //     let message = err.response.data.message;
-    //     throw Array.isArray(message) ? message : [message];
-    //   }
-    // }
-    
-    /////////////////////////////    

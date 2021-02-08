@@ -41,7 +41,7 @@ const Login=()=>{
                     <label htmlFor="email">Email </label>
                     <input 
                     id='email' 
-                    type='text'
+                    type='email'
                     name='email'
                     value={formData.email}
                     onChange={handleChange} 

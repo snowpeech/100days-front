@@ -29,7 +29,6 @@ const EditAmPost = ({postInfo, edit, goalId, closeModal, setPostInfo})=>{
     }
 
     return (<div className="edit-post-form">
-        <h3>AM</h3>
         <form onSubmit={handleAmSubmit} className="border-boxx">
             <div className="input-label">
                 <label htmlFor="gratitude_am">Today, I am grateful for: </label>

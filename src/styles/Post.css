@@ -5,16 +5,16 @@ button {
 
 .delete-btn {
     background-color: #fff;
-    color: #ff7211;
-    border-color: #ff7211;
+    color: #FC8D62;
+    border-color: #FC8D62;
     margin: 10px;
     border-radius: 4px;
   }
 
 .delete-btn:active, .delete-btn:hover {
     color: #fff;
-    background-color: #ff7211;
-    border-color: #ff7211;
+    background-color: #FC8D62;
+    border-color: #FC8D62;
     margin: 10px;
     border-radius: 4px;
 }

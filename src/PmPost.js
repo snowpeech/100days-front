@@ -24,7 +24,6 @@ const PmPost = ({post, setPostInfo})=>{
     const handleShow = () => setShowEdit(true);
 
     return (<div>   
-        <h2>PM</h2> 
         <button className='edit-btn' onClick={handleShow}>
            <i className="fas fa-edit"></i>
         </button>
@@ -32,7 +31,7 @@ const PmPost = ({post, setPostInfo})=>{
 
         <Modal show={showEdit} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
-          <Modal.Title>Edit Post</Modal.Title>
+          <Modal.Title>Edit PM Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <EditPmPost postInfo={post} edit={true} goalId ={goal_id} day={day} closePmModal = {handleClose} setPostInfo={setPostInfo}/>

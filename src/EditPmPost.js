@@ -30,7 +30,6 @@ const EditPmPost = ({postInfo, edit, goalId, closePmModal, setPostInfo})=>{ //no
     }
 
     return (<div  className="edit-post-form" >
-        <h3>PM</h3>
         <form onSubmit={handlePmSubmit} className="border-boxx">
             <div className="input-label">
                 <label htmlFor="gratitude_pm">I am glad this happened: </label>

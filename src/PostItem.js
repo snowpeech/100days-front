@@ -55,9 +55,6 @@ const PostItem = ({day}) =>{
     </Card.Body>
   </Card>
 
-    // let amInfo = "am"
-    // let pmInfo = "pm"
-
     return(<Container>
         <Link to={`journal/${day.day}`}> <h4>Day {day.day} :: {curDay}</h4>  </Link>
            
@@ -69,11 +66,4 @@ const PostItem = ({day}) =>{
     </Container>)
 }
 
-
 export default PostItem;
-
-{/* <ol>
-        {day.task1 && <li>{day.task1}</li>}
-        {day.task2 && <li>{day.task2}</li>}
-        {day.task3 && <li>{day.task3}</li>}
-    </ol>  */}

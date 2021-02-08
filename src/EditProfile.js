@@ -3,7 +3,7 @@ import UserContext from "./UserContext"
 import {useHistory} from "react-router-dom";
 import useFields from "./hooks/useFields"
 import ApiHelper from './helpers/ApiHelper';
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
 
 //passing info down instead of grabbing from Context
 const EditProfile=({id,first_name, last_name,location})=>{
@@ -21,6 +21,12 @@ const EditProfile=({id,first_name, last_name,location})=>{
         alert("Account Updated!")
         history.push("/") //to go to profile page or something
         setStoredUser({...storedUser,first_name, last_name, location })
+    }
+
+    const handleDelete = async () => {
+        let res = await ApiHelper.deleteUser(id);
+        console.log("delete res", res)
+        history.push("/logout") 
     }
 
     return(<>
@@ -55,8 +61,9 @@ const EditProfile=({id,first_name, last_name,location})=>{
                     onChange = {setFormData}
                 />
             </div>
-            <Button> Update Profile</Button>
+            <button className="edit-btn mx-auto"> Update Profile</button>
         </form>
+        <button className="delete-btn mb-5" onClick={handleDelete}><i className="fas fa-user-slash"></i></button>
 
     </>)
 }

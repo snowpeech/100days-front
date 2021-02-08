@@ -8,9 +8,9 @@ import PmPost from './PmPost'
 import EditAmPost from './EditAmPost'
 import EditPmPost from './EditPmPost'
 import ApiHelper from './helpers/ApiHelper';
-import './styles/Today.css'
 import NoGoal from './NoGoal';
 import BrokenLink from './BrokenLink'
+import './styles/Today.css'
 
 const dayjs = require('dayjs');
 
@@ -19,7 +19,7 @@ const Today = ()=>{
     const start_day = localStorage.getItem("_startDay")
     let { day } = useParams();
 
-    const regex = new RegExp('^[0-9]*$')
+    const regex = new RegExp('^[0-9]*$') //for protecting against user-entered bad URLs
     
     //change curday to startday + day from params using dayjs
     let curDay = dayjs(start_day).add(+day, 'day').format('MMMM D, YYYY') 
@@ -57,24 +57,25 @@ const Today = ()=>{
         <h4 className="quiet">Today is a good day</h4>
         <div>
             {day >= 1 ? <Link to={`/journal/${day-1}`} className="day-nav"><i className="fas fa-chevron-left"></i> Prev Day  </Link> : <div className="inactive">You're at the first day</div>}
-            <span className="day-nav">| Day {day} |</span>
+            
+            
+            {day%10 ===0 ? <span className="day-nav">| <Link className ='brighten' to={`/ten/${day}`}> Day {day} </Link> |</span> 
+                        : <span className="day-nav">| Day {day} |</span>}
+            
+            
             {day < 100 ? <Link to={`/journal/${+day+1}`} className="day-nav"> Next Day <i className="fas fa-chevron-right"></i> </Link> : <div className="inactive">You're at the last day!</div>}
         </div>
         <Container>
             <Row>
                 <Col xs={12} md={6}>
+                <h3>AM</h3>
         { postInfo["gratitude_am"]  ? <AmPost post={postInfo} setPostInfo={setPostInfo}/> : <EditAmPost edit={false} postInfo={{...postInfo, ...blankAm}} goalId ={goalId}  setPostInfo={setPostInfo}/> }
                 </Col>
                 <Col xs={12} md={6}>
+                <h3>PM</h3>
         { postInfo["gratitude_pm"]  ? <PmPost post={postInfo} setPostInfo={setPostInfo}/> : <EditPmPost edit={false} postInfo={{...postInfo, ...blankPm}} goalId ={goalId} setPostInfo={setPostInfo}/> }
                 </Col>
             </Row>
-            {/* <Row><Col>
-
-        { (+day%10 === 0 && +day !==0) && postInfo["ten"] ? <TenPost post={postInfo} setPostInfo={setPostInfo}/> : ""}
-        
-        {(+day%10 === 0 && +day !==0) && !postInfo["ten"] ? <EditTenPost edit={false} postInfo={{...postInfo, ten:blankTen}} goalId ={goalId} setPostInfo={setPostInfo}/> :"" }
-            </Col></Row> */}
         </Container>
         </>)
     }

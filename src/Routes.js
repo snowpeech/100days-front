@@ -6,9 +6,8 @@ import UserContext from "./UserContext"
 import NewGoal from "./NewGoal";
 import Today from "./Today";
 import About from './About'
-import ProtectedRoute from './ProtectedRoute'
 import Dashboard from "./Dashboard";
-import TenSummary from './TenSummary'
+import TenSummary from './TenComponents/TenSummary'
 
 const Routes =()=>{
 /* Home page is a simple welcome page
@@ -21,32 +20,42 @@ Goals displays Goal information + allows to edit. May combine with  Profile page
 
 return(<Switch>
 
-    <ProtectedRoute exact path="/profile">
-        <Dashboard />
-    </ProtectedRoute>
+    <Route exact path="/profile">
+        {storedUser ? <Dashboard /> : <Redirect to="/"/> }
+    </Route>
 
-    <ProtectedRoute exact path="/logout">
+    <Route exact path="/logout">
         <Logout />
-    </ProtectedRoute>
+    </Route>
 
-    <ProtectedRoute exact path="/goals">
-       <NewGoal />
-    </ProtectedRoute>
+    <Route exact path="/goals">
+        {storedUser ? <NewGoal/> : <Redirect to="/"/> }
+    </Route>
     
-    <ProtectedRoute exact path="/journal/NaN">
-         <div>Let's <Link to="/goals">create a new goal</Link> before journaling</div> 
-    </ProtectedRoute>
+    <Route exact path="/journal/NaN">
+        {storedUser ? <div>Let's <Link to="/goals">create a new goal</Link> before journaling</div> : <Redirect to="/"/> }
+    </Route>
 
-    <ProtectedRoute exact path="/journal/:day">
-        <Today goalId = {goalId} />        
-    </ProtectedRoute>
+    <Route exact path="/journal/undefined">
+        {storedUser ? <div><Link to="/goals">Create a new goal</Link> before journaling</div> : <Redirect to="/"/> }
+    </Route>
+
+    <Route exact path="/journal/:day">
+        {storedUser ? <Today goalId = {goalId} /> : <Redirect to="/"/> }
+        
+    </Route>
     
     <Route exact path="/about">
         <About />
     </Route>
 
+    <Route exact path="/ten/undefined">
+        {storedUser ? <div><Link to="/goals">Create a new goal</Link> before journaling</div> : <Redirect to="/"/> }
+    </Route>
+    
     <Route exact path="/ten/:day">
-        <TenSummary />
+        {storedUser ? <TenSummary/> : <Redirect to="/"/> } 
+        
     </Route>
 
 

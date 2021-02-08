@@ -18,3 +18,9 @@ a.day-nav:hover {
     font-style: italic;   
     font-size: medium;
 }
+
+a.brighten {
+    color:#d49f00 ;
+    font-weight: 600;
+    text-shadow: 0 0 3px #d49f00;
+}

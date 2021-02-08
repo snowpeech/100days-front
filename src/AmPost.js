@@ -24,7 +24,6 @@ const AmPost = ({post, setPostInfo})=>{
     const handleShow = () => setShowEdit(true);
 
     return (<div>   
-        <h3>AM</h3> 
         <button className='edit-btn' onClick={handleShow}>
            <i className="fas fa-edit"></i>
         </button>
@@ -32,7 +31,7 @@ const AmPost = ({post, setPostInfo})=>{
 
         <Modal show={showEdit} onHide={handleClose} animation={true}>
         <Modal.Header closeButton>
-          <Modal.Title></Modal.Title>
+          <Modal.Title>Edit AM Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <EditAmPost postInfo={post} edit={true} goalId ={goal_id} day={day} closeModal = {handleClose} setPostInfo={setPostInfo}/>

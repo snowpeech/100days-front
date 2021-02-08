@@ -3,7 +3,7 @@ import {useHistory} from "react-router-dom";
 import useFields from "./hooks/useFields"
 import ApiHelper from './helpers/ApiHelper';    
 import UserContext from "./UserContext"
-// import "./styles/Signup.css"
+import "./styles/Signup.css"
 
 
 const Signup=()=>{
@@ -34,14 +34,13 @@ const Signup=()=>{
             <div>
                 <label htmlFor="email">Email </label>
                 <input 
-                    type="text"
+                    type="email"
                     name = "email"
                     value ={formData.email}
                     onChange = {setFormData}
                 />
             </div>
             <div>
-                {/* put requirements for password here? */}
                 <label htmlFor ="password">Password </label>
                 <input  
                     type="password"
@@ -51,7 +50,6 @@ const Signup=()=>{
                 />
             </div>
             <div>
-                {/* put requirements for password here? */}
                 <label htmlFor ="password2">Re-Type Password </label>
                 <input  
                     type="password"
@@ -59,8 +57,8 @@ const Signup=()=>{
                     value ={formData.password2}
                     onChange = {setFormData}
                 />
-            </div>
-            {formData.password !== formData.password2 ? <div>Passwords don't match</div> : ""}
+            </div>            
+            
             <div>
                 <label htmlFor="first_name">First Name </label>
             

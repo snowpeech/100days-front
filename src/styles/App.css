@@ -102,5 +102,6 @@ button {
 }
 
 .graph-container{
-  height:280px;
+  height:300px;
+  width: 90%;
 }

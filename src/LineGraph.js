@@ -3,11 +3,11 @@ import { ResponsiveLine } from '@nivo/line'
 const LineGraph = ({data}) => (
     <ResponsiveLine
         data={data}
-        margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
+        margin={{ top: 50, right: 5, bottom: 50, left: 60 }}
         xScale={{ type: 'point' }}
         yScale={{ type: 'linear', min: '0', max: '10', stacked: false, reverse: false }}
         yFormat=" >-.2f"
-        curve="natural"
+        curve="monotoneX"
         axisTop={null}
         axisRight={null}
         axisBottom={{
@@ -30,6 +30,8 @@ const LineGraph = ({data}) => (
         }}
         colors={{ scheme: 'set2' }}
         isInteractive={false}
+        enableGridX={false}
+        gridYValues={[0,2,4,6,8,10]}
         pointSize={6}
         pointColor={{ theme: 'background' }}
         pointBorderWidth={2}
@@ -39,13 +41,13 @@ const LineGraph = ({data}) => (
         legends={[
             {
                 anchor: 'bottom-right',
-                direction: 'column',
+                direction: 'row',
                 justify: false,
-                translateX: 100,
-                translateY: 0,
+                translateX: -10,
+                translateY: -215,
                 itemsSpacing: 0,
                 itemDirection: 'left-to-right',
-                itemWidth: 80,
+                itemWidth: 90,
                 itemHeight: 20,
                 itemOpacity: 0.75,
                 symbolSize: 12,

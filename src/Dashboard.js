@@ -34,9 +34,9 @@ const Dashboard = ()=>{
     },[goalId])
 
 return(<Container>
-               <ProgressBar variant="info" now={dayDiff} label={`${dayDiff}/100 days`}/>
+            {goalId &&  <ProgressBar className= "mb-3" variant="info" now={dayDiff} label={`${dayDiff}/100 days`}/>}
     <Row>
-        <Col xs={12} md={3}>
+        <Col xs={12} md={3} className='r-border'>
             <Profile/>    
         </Col>
         <Col xs={12} md={9}>

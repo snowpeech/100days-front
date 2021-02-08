@@ -1,25 +1,21 @@
 import React,{useState} from 'react';
 import Modal from 'react-bootstrap/Modal';
 import EditTenPost from './EditTenPost'
-import ApiHelper from './helpers/ApiHelper';
-import './styles/Post.css'
+import ApiHelper from '../helpers/ApiHelper';
+import '../styles/Post.css'
                                                       
-const TenPost = ({post, setPostInfo})=>{
+const TenPost = ({post, setPostInfo, goalId, day, blankTen})=>{
     // goal_id,day,progress, win1, win2, win3, win_plan1, bad1, bad2, bad3, solution1,microgoal
     //progress = "Did I accomplish my last microgoal?" //maybe can pull up last micro-goal
-    const {accomplished, win1, win2, win3, win_plan1, win_plan2, win_plan3, bad1, bad2, bad3, solution1, solution2, solution3, microgoal, goal_id, day} = post //user_def1, user_def2, user_def3,
-    
+    const {accomplished, win1, win2, win3, win_plan1, win_plan2, win_plan3, bad1, bad2, bad3, solution1, solution2, solution3, microgoal} = post //user_def1, user_def2, user_def3,
     const [showEdit, setShowEdit] = useState(false);
     const handleClose = () => {
         setShowEdit(false);
     }
 
     const deletePost = async () => {
-      await ApiHelper.deletePost(post.goal_id, post.day,"tendays")
-      //check on what is returned in Postman to see what should be kept.
-      const {ten, ...keepVals} = post //user_def1, user_def2, user_def3,
-      
-      setPostInfo(keepVals) 
+      await ApiHelper.deletePost(goalId, day,"tendays")
+      setPostInfo(blankTen) 
     }
     const handleShow = () => setShowEdit(true);
 
@@ -35,13 +31,13 @@ const TenPost = ({post, setPostInfo})=>{
           <Modal.Title>Edit Post</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <EditTenPost postInfo={post} edit={true} goalId ={goal_id} day={day} closeTenModal = {handleClose} setPostInfo={setPostInfo}/>
+            <EditTenPost postInfo={post} edit={true} goalId ={goalId} dayNum={day} closeTenModal = {handleClose} setPostInfo={setPostInfo}/>
         </Modal.Body>
       </Modal>
 
-      {/* // goal_id,day,progress, win1, win2, win3, win_plan1, bad1, bad2, bad3, solution1,microgoal */}
+      {/* // progress, win1, win2, win3, win_plan1, bad1, bad2, bad3, solution1,microgoal */}
         <div className="border-box">
-            <h5>I <u>{accomplished ? "did" : "did not"}</u> accomplish my last microgoal </h5>
+            <h5>I <u>{accomplished ? "did" : "did not"}</u> accomplish my last microgoal{accomplished && "!"}</h5>
             <h5>These things worked well over the last 10 days: </h5>
             <ol>
                 {win1 && <li>{win1}</li>}
