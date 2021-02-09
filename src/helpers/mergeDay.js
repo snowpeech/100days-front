@@ -6,11 +6,8 @@ function mergeDay(arr1, arr2) {
     let j = 0;
 
     while(i < arr1.length && j < arr2.length){
-        console.log("i",arr1[i].day,"j", arr2[j].day, "i<j?",arr1[i].day < arr2[j].day)
         //compare values and push larger day onto sorted
         if(arr1[i].day === arr2[j].day){
-            console.log("i",arr1[i].day,"j", arr2[j].day )
-            console.log("is equal")
             sorted.push({...arr1[i], ...arr2[j]});
             i++;
             j++;        
@@ -32,7 +29,7 @@ function mergeDay(arr1, arr2) {
         sorted.push(arr2[j]);
         j++;
     }
-    // console.log(sorted)
+    
     return sorted;
 }
 

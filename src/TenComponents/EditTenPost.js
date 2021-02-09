@@ -23,10 +23,13 @@ const EditTenPost = ({postInfo, edit, goalId, dayNum, closeTenModal, setPostInfo
             //create postObj with desired variables
             tenFormData.accomplished=checkbox;
             console.log("TEN POST EDIT", tenFormData, "GOAL ID",+postInfo.goal_id, "PASSED IN?", goalId)
-
             const {goal_id, day, ...postingTen} = tenFormData;
-            await ApiHelper.editPost(goalId, dayNum, "tendays",postingTen);
-          
+            if(dayNum === 0){
+                await ApiHelper.editPost(goalId, dayNum, "tendays", {accomplished:true, win1:" ", win_plan1:" ", bad1:" ", solution1:" ",  microgoal:tenFormData.microgoal})
+            } else {
+                await ApiHelper.editPost(goalId, dayNum, "tendays",postingTen);
+            }
+
             setPostInfo(postingTen)
             closeTenModal();
         } else {
@@ -35,13 +38,40 @@ const EditTenPost = ({postInfo, edit, goalId, dayNum, closeTenModal, setPostInfo
             tenFormData.accomplished=checkbox;
             console.log("tenformdata.accomplished?", tenFormData)
             const {goal_id, day, ...postingTen} = tenFormData;
-            await ApiHelper.createPost(goalId, dayNum, "tendays",postingTen);
+            if(dayNum === 0){   
+                await ApiHelper.createPost(goalId, dayNum, "tendays", {accomplished:true, win1:" ", win_plan1:" ", bad1:" ", solution1:" ",  microgoal:tenFormData.microgoal})
+            } else {
+                await ApiHelper.createPost(goalId, dayNum, "tendays",postingTen);
+            }
+
+            
             
             setPostInfo(tenFormData);
         }
             
         resetTenFormData();
     }
+    if(dayNum === 0){
+        return(
+            <div  className="edit-post-form">
+        <h3>Ten Day Review</h3>
+        <form onSubmit={handleTenSubmit} className="border-box">
+            <div>
+                <label htmlFor="reflect">My next 10-day microgoal:</label>
+                <input 
+                    type="text"
+                    name = "microgoal"
+                    value ={tenFormData.microgoal}
+                    onChange = {setTenFormData}
+                    required
+                />
+            </div>
+            <button className="edit-btn">Committed</button>
+        </form>
+        </div>
+        )
+    }
+    
 
     return (<div  className="edit-post-form">
         <h3>Ten Day Review</h3>

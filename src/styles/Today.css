@@ -20,7 +20,12 @@ a.day-nav:hover {
 }
 
 a.brighten {
-    color:#d49f00 ;
-    font-weight: 600;
+    color:#d49f00;
     text-shadow: 0 0 3px #d49f00;
+}
+
+a.brighten::before {
+    font-family: "Font Awesome 5 Free"; 
+    font-weight: 900; 
+    content: "\f005";
 }
